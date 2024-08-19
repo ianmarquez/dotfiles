@@ -1,0 +1,20 @@
+return {
+	"NvChad/nvim-colorizer.lua",
+	event = {
+		"BufReadPre *.css",
+		"BufNewFile *.css",
+		"BufReadPre *.html",
+		"BufNewFile *.html",
+		"BufReadPre *.jsx",
+		"BufReadPre *.jsx",
+		"BufNewFile *.tsx",
+		"BufNewFile *.tsx",
+		"BufNewFile *.svelte",
+		"BufNewFile *.svelte",
+		"BufNewFile *.lua",
+		"BufNewFile *.lua",
+		"BufNewFile *.json",
+		"BufNewFile *.json",
+	},
+	config = true,
+}
