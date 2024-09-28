@@ -17,10 +17,11 @@ return {
     lint.linters_by_ft = opts.linters_by_ft
     local eslint = lint.linters.eslint_d
     eslint.args = {
-      "--format",
-      "json",
-      "--stdin",
-      "--stdin-filename",
+      '--no-warn-ignored',     -- <-- this is the key argument
+      '--format',
+      'json',
+      '--stdin',
+      '--stdin-filename',
       function()
         return vim.api.nvim_buf_get_name(0)
       end,
