@@ -16,5 +16,5 @@ dimensions = { columns = 150, lines = 50 }
 # blur = true
 
 [font]
-normal.family = "MesloLGS Nerd Font Mono"
-size = 18
+normal.family = "MesloLGL Nerd Font Mono"
+size = 17
