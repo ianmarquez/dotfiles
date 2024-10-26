@@ -17,4 +17,4 @@ dimensions = { columns = 150, lines = 50 }
 
 [font]
 normal.family = "MesloLGL Nerd Font Mono"
-size = 17
+size = 15
