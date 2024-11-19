@@ -1,10 +1,10 @@
 return {
   "voldikss/vim-floaterm",
   lazy = true,
+  event = "VeryLazy",
   keys = {
     { "<F1>",       ":FloatermToggle<cr>",         desc = "Toggle Floaterm" },
     { "<leader>tn", ":FloatermNew<cr>",            desc = "New Floaterm" },
-    { "<leader>tg", ":FloatermNew lazygit<cr>",    desc = "Open lazygit" },
     { "<leader>tv", ":FloatermNew lazydocker<cr>", desc = "Open lazydocker" },
   },
   init = function()

@@ -17,7 +17,6 @@ return {
     lint.linters_by_ft = opts.linters_by_ft
     local eslint = lint.linters.eslint_d
     eslint.args = {
-      '--no-warn-ignored',     -- <-- this is the key argument
       '--format',
       'json',
       '--stdin',
