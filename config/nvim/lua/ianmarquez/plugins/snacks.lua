@@ -8,9 +8,9 @@ return {
     dashboard = {
       sections = {
         { section = "header" },
-        { section = "keys", gap = 0 },
-        { icon = " ", title = "Recent Files", section = "recent_files", indent = 1, padding = { 2, 1 } },
-        { icon = " ", title = "Projects", section = "projects", indent = 1, padding = 1 },
+        { section = "keys", gap = 1 },
+        { icon = " ", title = "Projects", section = "projects", padding = { 2, 1 } },
+        -- { icon = " ", title = "Recent Files", section = "recent_files", indent = 1, padding = 1 },
         { section = "startup" },
       },
     }
@@ -21,7 +21,13 @@ return {
     quickfile = { enabled = true },
     rename = { enabled = false },
     statuscolumn = { enabled = false },
-    terminal = { enabled = true },
+    terminal = {
+      enabled = true,
+      win = {
+        position = 'float',
+        border = 'single',
+      },
+    },
     toggle = { enabled = false },
     words = { enabled = false },
     styles = {
@@ -31,7 +37,7 @@ return {
     }
   },
   keys = {
-    { "<F1>",       function() require("snacks").terminal.toggle("zsh") end,        desc = "Terminal" },
+    { "<F1>",       function() require("snacks").terminal.toggle() end,             desc = "Terminal" },
     { "<leader>tv", function() require("snacks").terminal.toggle("lazydocker") end, desc = "LazyDocker" },
     { "<leader>gb", function() require("snacks").git.blame_line() end,              desc = "Git Blame Line" },
     { "<leader>gB", function() require("snacks").gitbrowse() end,                   desc = "Git Browse" },
