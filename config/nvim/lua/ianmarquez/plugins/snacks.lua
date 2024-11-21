@@ -2,7 +2,6 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
-  ---@type snacks.Config
   opts = {
     bigfile = { enabled = false },
     bufdelete = { enabled = false },
@@ -22,7 +21,7 @@ return {
     quickfile = { enabled = true },
     rename = { enabled = false },
     statuscolumn = { enabled = false },
-    terminal = { enabled = false },
+    terminal = { enabled = true },
     toggle = { enabled = false },
     words = { enabled = false },
     styles = {
@@ -32,10 +31,12 @@ return {
     }
   },
   keys = {
-    { "<leader>gb", function() Snacks.git.blame_line() end,   desc = "Git Blame Line" },
-    { "<leader>gB", function() Snacks.gitbrowse() end,        desc = "Git Browse" },
-    { "<leader>tg", function() Snacks.lazygit() end,          desc = "Lazygit" },
-    { "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Lazygit Current File History" },
-    { "<leader>gl", function() Snacks.lazygit.log() end,      desc = "Lazygit Log (cwd)" },
+    { "<F1>",       function() require("snacks").terminal.toggle("zsh") end,        desc = "Terminal" },
+    { "<leader>tv", function() require("snacks").terminal.toggle("lazydocker") end, desc = "LazyDocker" },
+    { "<leader>gb", function() require("snacks").git.blame_line() end,              desc = "Git Blame Line" },
+    { "<leader>gB", function() require("snacks").gitbrowse() end,                   desc = "Git Browse" },
+    { "<leader>tg", function() require("snacks").lazygit() end,                     desc = "Lazygit" },
+    { "<leader>gf", function() require("snacks").lazygit.log_file() end,            desc = "Lazygit Current File History" },
+    { "<leader>gl", function() require("snacks").lazygit.log() end,                 desc = "Lazygit Log (cwd)" },
   },
 }

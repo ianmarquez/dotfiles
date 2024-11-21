@@ -14,7 +14,7 @@ return {
     wk.add({
       {
         "<leader>f",
-        group = "Telescope Find",
+        group = "Fzf",
       },
       {
         "<leader>w",
