@@ -4,6 +4,6 @@ source ~/.zshrc
 
 brew install zinit
 brew install nvim
-brew install alacritty
+brew install wezterm
 brew install --cask font-meslo-lg-nerd-font
 brew install btop
