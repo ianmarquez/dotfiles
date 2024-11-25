@@ -39,6 +39,7 @@ return -- treesitter
         "go",
         "rust",
         "zig",
+        "sql"
       },
       -- auto install above language parsers
       auto_install = true,

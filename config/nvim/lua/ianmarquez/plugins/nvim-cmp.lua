@@ -2,13 +2,21 @@ return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   dependencies = {
-    "L3MON4D3/LuaSnip", -- snippet engine
+    "L3MON4D3/LuaSnip",   -- snippet engine
     "hrsh7th/cmp-buffer", -- source for text in buffer
     "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-path",
-    "onsails/lspkind.nvim",       -- vs-code like pictograms
+    "onsails/lspkind.nvim",         -- vs-code like pictograms
     "rafamadriz/friendly-snippets", -- useful snippets
-    "saadparwaiz1/cmp_luasnip",   -- for autocompletion
+    "saadparwaiz1/cmp_luasnip",     -- for autocompletion
+    {
+      "MattiasMTS/cmp-dbee",
+      dependencies = {
+        { "kndndrj/nvim-dbee" }
+      },
+      ft = "sql", -- optional but good to have
+      opts = {},  -- needed
+    },
   },
   config = function()
     local cmp = require("cmp")
@@ -33,16 +41,17 @@ return {
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-        ["<C-q>"] = cmp.mapping.abort(),    -- close completion window
+        ["<C-q>"] = cmp.mapping.abort(),        -- close completion window
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
       }),
       -- sources for autocompletion
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
-        { name = "luasnip" }, -- snippets
-        { name = "buffer" }, -- text within current buffer
-        { name = "path" }, -- file system paths
-        { name = "cmdline" },
+        { name = "luasnip" },  -- snippets
+        { name = "buffer" },   -- text within current buffer
+        { name = "path" },     -- file system paths
+        { name = "cmdline" },  -- command line
+        { name = "cmp-dbee" }, -- database completion
       }),
       -- configure lspkind for vs-code like pictograms in completion menu
       formatting = {
