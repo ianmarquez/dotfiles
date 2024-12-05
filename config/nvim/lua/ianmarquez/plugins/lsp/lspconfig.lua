@@ -33,7 +33,7 @@ return {
       keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 
       opts.desc = "Typescript Organize Imports"
-      keymap.set("n", "<leader>oi", ":OrganizeImports<CR>", opts) -- mapping to restart lsp if necessary
+      keymap.set("n", "<leader>oi", ":OrganizeImports<CR>", opts) -- mapping to organize imports for typescript
     end
 
     -- used to enable autocompletion (assign to every lsp server config)
@@ -66,24 +66,24 @@ return {
       },
     })
 
-    lspconfig.gleam.setup({})
+    local servers = {
+      "gleam",
+      "html",
+      "cssls",
+      "tailwindcss",
+      "prismals",
+      "pyright",
+      "cmake",
+      "templ"
+    }
 
-    -- configure html server
-    lspconfig["html"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
+    for _, lsp in ipairs(servers) do
+      lspconfig[lsp].setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+    end
 
-    lspconfig["cssls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    -- configure tailwindcss server
-    lspconfig["tailwindcss"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
 
     -- configure svelte server
     lspconfig["svelte"].setup({
@@ -92,30 +92,33 @@ return {
       filetypes = { "svelte" },
     })
 
-    -- configure prisma orm server
-    lspconfig["prismals"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
     -- configure graphql language server
     lspconfig["graphql"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
+      filetypes = {
+        "graphql",
+        "gql",
+        "svelte",
+        "typescriptreact",
+        "javascriptreact"
+      },
     })
 
     -- configure emmet language server
     lspconfig["emmet_ls"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
-    })
-
-    -- configure python server
-    lspconfig["pyright"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
+      filetypes = {
+        "html",
+        "typescriptreact",
+        "javascriptreact",
+        "css",
+        "sass",
+        "scss",
+        "less",
+        "svelte"
+      },
     })
 
     -- configure gopls server
@@ -135,6 +138,7 @@ return {
         },
       },
     })
+
 
     -- configure lua server (with special settings)
     lspconfig["lua_ls"].setup({
