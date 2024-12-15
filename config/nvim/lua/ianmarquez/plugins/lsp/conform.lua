@@ -21,6 +21,7 @@ return {
         sql = { "sql_formatter" },
 
         go = { "goimports", "gofmt", "golines" },
+        templ = { "templ" },
 
         lua = { "stylua" },
       },

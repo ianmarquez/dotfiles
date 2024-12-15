@@ -117,7 +117,8 @@ return {
         "sass",
         "scss",
         "less",
-        "svelte"
+        "svelte",
+        "templ"
       },
     })
 
