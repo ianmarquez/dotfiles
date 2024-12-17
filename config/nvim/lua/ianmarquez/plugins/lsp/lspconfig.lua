@@ -165,6 +165,9 @@ return {
     vim.filetype.add({
       extension = {
         mdx = "jsx",
+        postcss = "css",
+        sass = "css",
+        less = "css",
         keymap = "c",
         overlay = "c",
         conf = "sh"
