@@ -74,7 +74,7 @@ return {
       "prismals",
       "pyright",
       "cmake",
-      "templ"
+      "templ",
     }
 
     for _, lsp in ipairs(servers) do
@@ -84,6 +84,16 @@ return {
       })
     end
 
+    lspconfig["omnisharp"].setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
+      -- root_dir = function(fname)
+      --   local primary = lspconfig.util.root_pattern("*.sln")(fname)
+      --   local fallback = lspconfig.util.root_pattern("*.csproj")(fname)
+      --   return primary or fallback
+      -- end,
+      cmd = { vim.fn.stdpath "data" .. "/mason/bin/omnisharp" },
+    })
 
     -- configure svelte server
     lspconfig["svelte"].setup({
