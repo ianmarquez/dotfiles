@@ -37,7 +37,7 @@ return {
     }
   },
   keys = {
-    { "<F1>",       function() require("snacks").terminal.toggle() end,             desc = "Terminal" },
+    { "<c-/>",      function() require("snacks").terminal.toggle() end,             desc = "Terminal" },
     { "<leader>tv", function() require("snacks").terminal.toggle("lazydocker") end, desc = "LazyDocker" },
     { "<leader>gb", function() require("snacks").git.blame_line() end,              desc = "Git Blame Line" },
     { "<leader>gB", function() require("snacks").gitbrowse() end,                   desc = "Git Browse" },
