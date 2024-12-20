@@ -28,7 +28,7 @@ config.macos_window_background_blur = 85
 config.window_decorations = "TITLE | RESIZE"
 
 -- Font
-config.font = wezterm.font 'JetBrainsMono Nerd Font Mono'
+config.font = wezterm.font 'JetBrainsMonoNL Nerd Font Mono'
 config.font_size = 17
 
 -- Cursor
