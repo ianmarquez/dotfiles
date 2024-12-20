@@ -2,10 +2,10 @@ return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   dependencies = {
-    "L3MON4D3/LuaSnip",   -- snippet engine
-    "hrsh7th/cmp-buffer", -- source for text in buffer
-    "hrsh7th/cmp-cmdline",
-    "hrsh7th/cmp-path",
+    "L3MON4D3/LuaSnip",             -- snippet engine
+    "hrsh7th/cmp-buffer",           -- source for text in buffer
+    "hrsh7th/cmp-cmdline",          -- source for cmdline completion
+    "hrsh7th/cmp-path",             -- source for path completion
     "onsails/lspkind.nvim",         -- vs-code like pictograms
     "rafamadriz/friendly-snippets", -- useful snippets
     "saadparwaiz1/cmp_luasnip",     -- for autocompletion
