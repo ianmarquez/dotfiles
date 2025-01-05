@@ -1,11 +1,23 @@
 return -- treesitter
 {
   "nvim-treesitter/nvim-treesitter",
+  dependencies = {
+    "windwp/nvim-ts-autotag"
+  },
   event = { "BufReadPre", "BufNewFile" },
   build = ":TSUpdate",
   -- commit = "364b86e",
   config = function()
+    require("nvim-ts-autotag").setup({
+      opts = {
+        -- Defaults
+        enable_close = true,      -- Auto close tags
+        enable_rename = true,     -- Auto rename pairs of tags
+        enable_close_on_slash = false -- Auto close on trailing </
+      },
+    })
     local treesitter = require("nvim-treesitter.configs")
+
     treesitter.setup({
       -- enable syntax highlighting
       highlight = {

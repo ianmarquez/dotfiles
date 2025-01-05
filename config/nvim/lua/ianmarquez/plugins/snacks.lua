@@ -21,13 +21,7 @@ return {
     quickfile = { enabled = true },
     rename = { enabled = false },
     statuscolumn = { enabled = false },
-    terminal = {
-      enabled = true,
-      win = {
-        position = 'float',
-        border = 'single',
-      },
-    },
+    terminal = { enabled = true },
     toggle = { enabled = false },
     words = { enabled = false },
     styles = {
