@@ -8,7 +8,7 @@ return {
   lazy = true,
   opts = {
     options = {
-      theme = require("lualine.themes.catppuccin"),
+      theme = "auto"
     },
     sections = {
       lualine_c = {
