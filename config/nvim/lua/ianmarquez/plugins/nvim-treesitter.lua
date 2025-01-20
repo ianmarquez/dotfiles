@@ -11,8 +11,8 @@ return -- treesitter
     require("nvim-ts-autotag").setup({
       opts = {
         -- Defaults
-        enable_close = true,      -- Auto close tags
-        enable_rename = true,     -- Auto rename pairs of tags
+        enable_close = true,          -- Auto close tags
+        enable_rename = true,         -- Auto rename pairs of tags
         enable_close_on_slash = false -- Auto close on trailing </
       },
     })
@@ -46,7 +46,8 @@ return -- treesitter
         "go",
         "rust",
         "zig",
-        "sql"
+        "sql",
+        "templ"
       },
       -- auto install above language parsers
       auto_install = true,
