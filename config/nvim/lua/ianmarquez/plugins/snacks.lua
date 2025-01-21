@@ -13,13 +13,27 @@ return {
         -- { icon = " ", title = "Recent Files", section = "recent_files", indent = 1, padding = 1 },
         { section = "startup" },
       },
-    }
-    ,
+    },
     git = { enabled = false },
+    input = {
+      enabled = true,
+      position = "bottom"
+    },
+    indent = {
+      animate = { enabled = false },
+      enabled = true,
+      only_current = true,
+      only_scope = true,
+      scope = {
+        enabled = true,
+        underline = true,
+      },
+    },
     notifier = { enabled = false },
     notify = { enabled = false },
     quickfile = { enabled = true },
-    rename = { enabled = false },
+    rename = { enabled = true },
+    scope = { enabled = true },
     statuscolumn = { enabled = false },
     terminal = { enabled = true },
     toggle = { enabled = false },

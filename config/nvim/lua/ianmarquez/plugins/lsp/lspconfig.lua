@@ -16,9 +16,12 @@ return {
     local on_attach = function(_, bufnr)
       opts.buffer = bufnr
 
-      vim.keymap.set("n", "<leader>rn", function()
-        return ":IncRename " .. vim.fn.expand("<cword>")
-      end, { expr = true })
+      -- vim.keymap.set("n", "<leader>rn", function()
+      --   return ":IncRename " .. vim.fn.expand("<cword>")
+      -- end, { expr = true })
+
+      opts.desc = "LSP Rename"
+      vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
       opts.desc = "Go to previous diagnostic"
       keymap.set("n", "[[", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
