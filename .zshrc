@@ -100,3 +100,5 @@ PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+export FONTAWESOME_NPM_AUTH_TOKEN=FD064C2D-B152-49AF-98BD-2FCC16FF467F
