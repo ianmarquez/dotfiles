@@ -21,7 +21,7 @@ return {
     },
     indent = {
       animate = { enabled = false },
-      enabled = true,
+      enabled = false,
       only_current = true,
       only_scope = true,
       scope = {

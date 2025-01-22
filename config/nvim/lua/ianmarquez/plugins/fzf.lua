@@ -3,12 +3,7 @@ return {
   lazy = true,
   event = "VeryLazy",
   dependencies = { "nvim-tree/nvim-web-devicons" },
-  opts = {
-    "telescope",
-    files = {
-      -- cwd_prompt = false
-    }
-  },
+  opts = { "telescope" },
   keys = {
     { "<leader>fs", "<cmd>FzfLua live_grep<cr>",            desc = "Live Grep" },
     { "<leader>fc", "<cmd>FzfLua lgrep_curbuf<cr>",         desc = "Live Grep Current Buffer" },
