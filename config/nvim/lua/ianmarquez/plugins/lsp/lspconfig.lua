@@ -2,12 +2,10 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    "hrsh7th/cmp-nvim-lsp",
     { "antosha417/nvim-lsp-file-operations", config = true },
   },
   config = function()
     local lspconfig = require("lspconfig")
-    local cmp_nvim_lsp = require("cmp_nvim_lsp")
     local util = require("lspconfig/util")
 
     local keymap = vim.keymap
@@ -36,7 +34,6 @@ return {
     end
 
     -- used to enable autocompletion (assign to every lsp server config)
-    local capabilities = cmp_nvim_lsp.default_capabilities()
 
     -- Change the Diagnostic symbols in the sign column (gutter)
     local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
@@ -56,7 +53,6 @@ return {
 
     lspconfig.ts_ls.setup({
       on_attach = on_attach,
-      capabilities = capabilities,
       commands = {
         OrganizeImports = {
           organize_imports,
@@ -79,13 +75,11 @@ return {
     for _, lsp in ipairs(servers) do
       lspconfig[lsp].setup({
         on_attach = on_attach,
-        capabilities = capabilities,
       })
     end
 
     lspconfig["omnisharp"].setup({
       on_attach = on_attach,
-      capabilities = capabilities,
       -- root_dir = function(fname)
       --   local primary = lspconfig.util.root_pattern("*.sln")(fname)
       --   local fallback = lspconfig.util.root_pattern("*.csproj")(fname)
@@ -96,14 +90,12 @@ return {
 
     -- configure svelte server
     lspconfig["svelte"].setup({
-      capabilities = capabilities,
       on_attach = on_attach,
       filetypes = { "svelte" },
     })
 
     -- configure graphql language server
     lspconfig["graphql"].setup({
-      capabilities = capabilities,
       on_attach = on_attach,
       filetypes = {
         "graphql",
@@ -116,7 +108,6 @@ return {
 
     -- configure emmet language server
     lspconfig["emmet_ls"].setup({
-      capabilities = capabilities,
       on_attach = on_attach,
       filetypes = {
         "html",
@@ -133,7 +124,6 @@ return {
 
     -- configure gopls server
     lspconfig["gopls"].setup({
-      capabilities = capabilities,
       on_attach = on_attach,
       cmd = { "gopls" },
       filetypes = { "go", "gomod", "gowork", "gotmpl", "templ" },
@@ -152,7 +142,6 @@ return {
 
     -- configure lua server (with special settings)
     lspconfig["lua_ls"].setup({
-      capabilities = capabilities,
       on_attach = on_attach,
       settings = { -- custom settings for lua
         Lua = {
