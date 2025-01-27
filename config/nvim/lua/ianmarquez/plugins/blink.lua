@@ -1,3 +1,15 @@
+local default_binds = {
+  preset = 'default',
+  ["<Up>"] = { "select_prev", "fallback" },
+  ["<Down>"] = { "select_next", "fallback" },
+  ["<C-j>"] = { "select_prev", "fallback" },
+  ["<C-k>"] = { "select_next", "fallback" },
+}
+
+local combine = function(second_table, first_table)
+  for k, v in pairs(second_table) do first_table[k] = v end
+end
+
 return {
   {
     'saghen/blink.compat',
@@ -33,32 +45,17 @@ return {
           }
         }
       },
-      keymap = {
-        preset = 'default',
-        ["<Tab>"] = { "snippet_forward", "fallback" },
-        ["<S-Tab>"] = { "snippet_backward", "fallback" },
-        ["<CR>"] = { "select_and_accept", "fallback" },
-
-        ["<Up>"] = { "select_prev", "fallback" },
-        ["<Down>"] = { "select_next", "fallback" },
-        ["<C-j>"] = { "select_prev", "fallback" },
-        ["<C-k>"] = { "select_next", "fallback" },
-
-        ["<S-k>"] = { "scroll_documentation_up", "fallback" },
-        ["<S-j>"] = { "scroll_documentation_down", "fallback" },
-
-        ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
-        ["<C-e>"] = { "hide", "fallback" },
-        cmdline = {
-          preset = 'default',
-          ["<Tab>"] = { "snippet_forward", "fallback" },
-          ["<S-Tab>"] = { "snippet_backward", "fallback" },
-          ["<Up>"] = { "select_prev", "fallback" },
-          ["<Down>"] = { "select_next", "fallback" },
-          ["<C-j>"] = { "select_prev", "fallback" },
-          ["<C-k>"] = { "select_next", "fallback" },
+      keymap = combine(
+        default_binds,
+        {
+          ["<CR>"] = { "accept", "fallback" },
+          ["<S-k>"] = { "scroll_documentation_up", "fallback" },
+          ["<S-j>"] = { "scroll_documentation_down", "fallback" },
+          ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+          ["<C-e>"] = { "hide", "fallback" },
+          cmdline = default_binds
         }
-      },
+      ),
       appearance = {
         use_nvim_cmp_as_default = true,
         nerd_font_variant = 'mono'
