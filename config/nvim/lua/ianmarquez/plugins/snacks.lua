@@ -56,6 +56,6 @@ return {
     { "<leader>gf", function() require("snacks").lazygit.log_file() end,            desc = "Lazygit Current File History" },
     { "<leader>gl", function() require("snacks").lazygit.log() end,                 desc = "Lazygit Log (cwd)" },
     { "<leader>nd", function() require("snacks").notifier.hide() end,               desc = "Dismiss Notifications" },
-    { "<leader>nn", function() require("snacks").notifier.show_history() end,       desc = "Dismiss Notifications" },
+    { "<leader>nn", function() require("snacks").notifier.show_history() end,       desc = "Show Notifications" },
   },
 }

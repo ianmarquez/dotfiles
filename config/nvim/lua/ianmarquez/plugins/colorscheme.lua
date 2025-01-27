@@ -19,7 +19,6 @@ return {
       require("catppuccin").setup({
         transparent_background = true,
         integrations = {
-          cmp = true,
           gitsigns = true,
           mason = true,
           native_lsp = { enabled = true },
