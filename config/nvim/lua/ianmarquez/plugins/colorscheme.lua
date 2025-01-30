@@ -27,6 +27,7 @@ return {
           treesitter = true,
           treesitter_context = true,
           symbols_outline = true,
+          bufferline = false,
         },
       })
       -- load the colorscheme here

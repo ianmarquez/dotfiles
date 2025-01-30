@@ -1,6 +1,38 @@
 return {
   { "echasnovski/mini.bufremove", event = { "BufReadPre", "BufNewFile" }, version = false },
   {
+    'echasnovski/mini.tabline',
+    version = '*',
+
+    event = "UIEnter",
+    keys = {
+      { "<S-h>",      ":bprev<CR>",      desc = "Previous buffer",                  mode = "n" },
+
+      { "<S-l>",      ":bprev<CR>",      desc = "Next buffer",                      mode = "n" },
+      { "<leader>tx", ":bdelete<CR>",    desc = "Close current buffer",             mode = "n" },
+      { "<leader>tc", ":%bd|e#|bd#<CR>", desc = "Close all buffers except current", mode = "n" },
+    },
+    opts = {
+      show_icons = true,
+      tabpage_section = "right",
+      set_vim_settings = true,
+      format = function(buf_id, label)
+        local suffix = vim.bo[buf_id].modified and '' or ''
+        local readonly = vim.bo[buf_id].modifiable and '' or ''
+        return " " .. readonly .. MiniTabline.default_format(buf_id, label) .. suffix .. " "
+      end
+    },
+    config = function(_, opts)
+      require("mini.tabline").setup(opts)
+      vim.api.nvim_set_hl(0, "MiniTablineCurrent", { underline = false, italic = true, bold = true })
+      vim.api.nvim_set_hl(0, "MiniTablineHidden", { fg = "#6C7086" })
+      vim.api.nvim_set_hl(0, "MiniTablineModifiedCurrent",
+        { underline = false, italic = true, bold = true, fg = "#FAB387" })
+      vim.api.nvim_set_hl(0, "MiniTablineModifiedHidden", { italic = true, fg = "#F9E2AF" })
+      vim.api.nvim_set_hl(0, "MiniTablineFill", { fg = "#11111B" })
+    end
+  },
+  {
     "echasnovski/mini.pairs",
     event = { "BufReadPre", "BufNewFile" },
     opts = {},

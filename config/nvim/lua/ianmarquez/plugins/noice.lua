@@ -2,7 +2,7 @@ return {
   "folke/noice.nvim",
   dependencies = {
     "MunifTanjim/nui.nvim",
-    "NvChad/nvim-colorizer.lua", -- colorizer
+    "catgoose/nvim-colorizer.lua", -- colorizer
   },
   lazy = true,
   event = "VeryLazy",
