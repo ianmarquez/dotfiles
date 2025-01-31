@@ -56,14 +56,12 @@ return {
     mason_tool_installer.setup({
       ensure_installed = {
         "prettier",
-        "golangcilint",
+        "prettierd",
         "eslint_d",
-        "sql_formatter",
 
         "goimports",
-        "gofmt",
         "golines",
-        "golangcilint",
+        "golangci-lint",
 
         "stylua",
       },
