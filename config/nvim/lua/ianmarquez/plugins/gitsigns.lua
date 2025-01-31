@@ -7,6 +7,6 @@ return {
     },
   },
   keys = {
-    { "<leader>gb", "<cmd>Gitsigns toggle_current_line_blame<cr>", desc = "Toggle Blamer" },
+    { "<leader>gb", "<cmd>Gitsigns toggle_current_line_blame<cr>", desc = "Toggle Git Blame" },
   },
 }

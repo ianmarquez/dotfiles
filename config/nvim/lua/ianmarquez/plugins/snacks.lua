@@ -15,24 +15,15 @@ return {
       },
     },
     git = { enabled = false },
-    input = {
-      enabled = true,
-      position = "bottom"
-    },
+    input = { enabled = true, position = "bottom" },
     indent = {
       animate = { enabled = false },
       enabled = false,
       only_current = true,
       only_scope = true,
-      scope = {
-        enabled = true,
-        underline = true,
-      },
+      scope = { enabled = true, underline = true, },
     },
-    notifier = {
-      enabled = true,
-      timeout = 1500
-    },
+    notifier = { enabled = true, timeout = 1500 },
     notify = { enabled = true },
     quickfile = { enabled = true },
     rename = { enabled = true },

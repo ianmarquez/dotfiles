@@ -1,66 +1,23 @@
--- if true then return {} end
 return {
   "folke/noice.nvim",
   dependencies = {
     "MunifTanjim/nui.nvim",
-    "catgoose/nvim-colorizer.lua", -- colorizer
   },
   lazy = true,
   event = "VeryLazy",
   opts = {
     views = {
       cmdline_popup = {
-        position = {
-          row = 10,
-          col = "50%",
-        },
-        size = {
-          width = 50,
-          height = "auto",
-        },
-      },
-      popupmenu = {
-        relative = "editor",
-        position = {
-          row = 13,
-          col = "50%",
-        },
-        size = {
-          width = 60,
-          height = 10,
-        },
-        border = {
-          style = "rounded",
-          padding = { 0, 1 },
-        },
-        win_options = {
-          winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
-        },
+        position = { row = 10, col = "50%", },
+        size = { width = 50, height = "auto", },
       },
     },
-    cmdline = {
-      enabled = true,         -- enables the Noice cmdline UI
-      view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
-    },
-    messages = {
-      enabled = false,
-      view = "mini",               -- default view for messages
-      view_error = "mini",         -- view for errors
-      view_warn = "mini",          -- view for warnings
-      view_history = "messages",   -- view for :messages
-      view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
-    },
-    notify = {
-      enabled = false,
-      view = "mini",
-    },
+    cmdline = { enabled = true, view = "cmdline_popup", },
+    messages = { enabled = false, },
+    notify = { enabled = false, },
     routes = {
       {
-        filter = {
-          event = "msg_show",
-          kind = "",
-          find = "written",
-        },
+        filter = { event = "msg_show", kind = "", find = "written", },
         opts = { skip = true },
       },
     },
@@ -73,7 +30,7 @@ return {
     presets = {
       command_palette = true,       -- position the cmdline and popupmenu together
       long_message_to_split = true, -- long messages will be sent to a split
-      inc_rename = true,            -- enables an input dialog for inc-rename.nvim
+      -- inc_rename = true,            -- enables an input dialog for inc-rename.nvim
       lsp_doc_border = true,        -- add a border to hover docs and signature help
     },
   },

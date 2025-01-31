@@ -1,8 +1,32 @@
 return {
   {
+    'echasnovski/mini.move',
+    version = '*',
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {}
+  },
+  {
+    'echasnovski/mini.hipatterns',
+    version = '*',
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      local hipatterns = require('mini.hipatterns')
+      hipatterns.setup({
+        highlighters = {
+          fixme     = { pattern = 'FIXME', group = 'MiniHipatternsFixme' },
+          hack      = { pattern = 'HACK', group = 'MiniHipatternsHack' },
+          todo      = { pattern = 'TODO', group = 'MiniHipatternsTodo' },
+          note      = { pattern = 'NOTE', group = 'MiniHipatternsNote' },
+          hex_color = hipatterns.gen_highlighter.hex_color(),
+        },
+      })
+    end
+  },
+  {
     "echasnovski/mini.bufremove",
     version = "*",
     event = { "BufReadPre", "BufNewFile" },
+    opts = {},
   },
   {
     'echasnovski/mini.notify',
@@ -23,7 +47,9 @@ return {
   {
     "echasnovski/mini.icons",
     version = "*",
-    opts = {},
+    opts = {
+      style = "glyph"
+    },
     lazy = true,
     specs = { { "nvim-tree/nvim-web-devicons", enabled = false, optional = true }, },
     init = function()
@@ -47,15 +73,18 @@ return {
       show_icons = true,
       tabpage_section = "right",
       set_vim_settings = true,
-      format = function(buf_id, label)
-        local suffix = vim.bo[buf_id].modified and '' or ''
-        local readonly = vim.bo[buf_id].modifiable and '' or ''
-        local title = " " .. readonly .. MiniTabline.default_format(buf_id, label) .. suffix .. " "
-        return title
-      end
     },
     config = function(_, opts)
-      require("mini.tabline").setup(opts)
+      local tabline = require("mini.tabline")
+      opts.format = function(buf_id, label)
+        local suffix = vim.bo[buf_id].modified and '' or ''
+        local readonly = vim.bo[buf_id].modifiable and '' or ''
+        local title = " " .. readonly .. tabline.default_format(buf_id, label) .. suffix .. " "
+        return title
+      end
+
+      tabline.setup(opts)
+
       vim.api.nvim_set_hl(0, "MiniTablineCurrent", { underline = false, italic = true, bold = true })
       vim.api.nvim_set_hl(0, "MiniTablineHidden", { fg = "#6C7086" })
       vim.api.nvim_set_hl(0, "MiniTablineModifiedCurrent",

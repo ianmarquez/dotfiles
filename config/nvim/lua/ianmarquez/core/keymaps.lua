@@ -2,8 +2,8 @@ vim.g.mapleader = " "     -- <leader>
 
 local keymap = vim.keymap -- for conciseness
 
-keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move text down" })
-keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move text up" })
+-- keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move text down" })
+-- keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move text up" })
 
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "No highlight" })
 keymap.set("n", "x", '"_x"')
