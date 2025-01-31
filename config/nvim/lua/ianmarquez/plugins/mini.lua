@@ -2,6 +2,7 @@ return {
   {
     'echasnovski/mini.move',
     version = '*',
+
     event = { "BufReadPre", "BufNewFile" },
     opts = {}
   },
@@ -86,11 +87,11 @@ return {
       tabline.setup(opts)
 
       vim.api.nvim_set_hl(0, "MiniTablineCurrent", { underline = false, italic = true, bold = true })
-      vim.api.nvim_set_hl(0, "MiniTablineHidden", { fg = "#6C7086" })
+      vim.api.nvim_set_hl(0, "MiniTablineHidden", { fg = "#6C7086", bg = "#181825" })
       vim.api.nvim_set_hl(0, "MiniTablineModifiedCurrent",
         { underline = false, italic = true, bold = true, fg = "#FAB387" })
-      vim.api.nvim_set_hl(0, "MiniTablineModifiedHidden", { italic = true, fg = "#F9E2AF" })
-      vim.api.nvim_set_hl(0, "MiniTablineFill", { fg = "#313244" })
+      vim.api.nvim_set_hl(0, "MiniTablineModifiedHidden", { italic = true, fg = "#F9E2AF", bg = "#181825" })
+      vim.api.nvim_set_hl(0, "MiniTablineFill", { bg = "#181825" })
     end
   },
   {
