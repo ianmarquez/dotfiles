@@ -6,17 +6,17 @@ return {
 
     conform.setup({
       formatters_by_ft = {
-        javascript = { "prettierd" },
-        typescript = { "prettierd" },
-        javascriptreact = { "prettierd" },
-        typescriptreact = { "prettierd" },
+        javascript = { "prettier" },
+        typescript = { "prettier" },
+        javascriptreact = { "prettier" },
+        typescriptreact = { "prettier" },
         svelte = { "svelte-language-server", "prettier" },
-        css = { "prettierd" },
-        html = { "prettierd" },
-        json = { "prettierd", "jq" },
-        yaml = { "prettierd" },
-        markdown = { "prettierd" },
-        graphql = { "prettierd" },
+        css = { "prettier" },
+        html = { "prettier" },
+        json = { "prettier", "jq" },
+        yaml = { "prettier" },
+        markdown = { "prettier" },
+        graphql = { "prettier" },
 
         sql = { "sql_formatter" },
 

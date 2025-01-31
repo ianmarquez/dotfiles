@@ -14,6 +14,9 @@ return {
     local on_attach = function(_, bufnr)
       opts.buffer = bufnr
 
+      opts.desc = "View Code Actions"
+      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+
       opts.desc = "LSP Rename"
       vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 

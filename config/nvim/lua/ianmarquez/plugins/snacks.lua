@@ -3,8 +3,6 @@ return {
   priority = 1000,
   lazy = false,
   opts = {
-    bigfile = { enabled = false },
-    bufdelete = { enabled = false },
     dashboard = {
       sections = {
         { section = "header" },
@@ -14,24 +12,14 @@ return {
         { section = "startup" },
       },
     },
-    git = { enabled = false },
-    input = { enabled = true, position = "bottom" },
-    indent = {
-      animate = { enabled = false },
-      enabled = false,
-      only_current = true,
-      only_scope = true,
-      scope = { enabled = true, underline = true, },
-    },
-    notifier = { enabled = true, timeout = 1500 },
-    notify = { enabled = true },
-    quickfile = { enabled = true },
-    rename = { enabled = true },
-    scope = { enabled = true },
-    statuscolumn = { enabled = false },
-    terminal = { enabled = true },
-    toggle = { enabled = false },
-    words = { enabled = false },
+    input = { position = "bottom", },
+    notifier = { timeout = 1500 },
+    notify = {},
+    picker = {},
+    quickfile = {},
+    rename = {},
+    scope = {},
+    terminal = {},
     styles = {
       notification = {
         wo = { wrap = true } -- Wrap notifications
@@ -48,5 +36,16 @@ return {
     { "<leader>gl", function() require("snacks").lazygit.log() end,                 desc = "Lazygit Log (cwd)" },
     { "<leader>nd", function() require("snacks").notifier.hide() end,               desc = "Dismiss Notifications" },
     { "<leader>nn", function() require("snacks").notifier.show_history() end,       desc = "Show Notifications" },
+
+    { "<leader>fs", function() require("snacks").picker.grep() end,                 desc = "Live Grep" },
+    { "<leader>fc", function() require("snacks").picker.grep_buffers() end,         desc = "Live Grep Current Buffer" },
+    { "<leader>fb", function() require("snacks").picker.buffers() end,              desc = "Buffers" },
+    { "<leader>ff", function() require("snacks").picker.files() end,                desc = "Files" },
+    { "<leader>o",  function() require("snacks").picker.lsp_symbols() end,          desc = "Symbols in Current File" },
+    { "<leader>fk", function() require("snacks").picker.keymaps() end,              desc = "Keymaps" },
+    { "<leader>fh", function() require("snacks").picker.highlights() end,           desc = "Highlights" },
+    { "gf",         function() require("snacks").picker.lsp_references() end,       desc = "Show LSP references" },
+    { "gD",         function() require("snacks").picker.lsp_type_definitions() end, desc = "Show Type Definitions" },
+    { "gd",         function() require("snacks").picker.lsp_definitions() end,      desc = "Show Definitions" },
   },
 }
