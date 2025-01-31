@@ -13,6 +13,7 @@ config.underline_position = "-4pt"
 -- Tab bar
 config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
+config.tab_bar_at_bottom = true
 
 -- Window
 config.initial_cols = 180
