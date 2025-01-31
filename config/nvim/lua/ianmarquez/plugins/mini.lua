@@ -91,7 +91,7 @@ return {
       vim.api.nvim_set_hl(0, "MiniTablineModifiedCurrent",
         { underline = false, italic = true, bold = true, fg = "#FAB387" })
       vim.api.nvim_set_hl(0, "MiniTablineModifiedHidden", { italic = true, fg = "#F9E2AF", bg = "#181825" })
-      vim.api.nvim_set_hl(0, "MiniTablineFill", { bg = "#181825" })
+      vim.api.nvim_set_hl(0, "MiniTablineFill", { bg = "#11111b" })
     end
   },
   {
