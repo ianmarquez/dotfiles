@@ -1,13 +1,32 @@
 return {
-  { "echasnovski/mini.bufremove", event = { "BufReadPre", "BufNewFile" }, version = false },
+  { "echasnovski/mini.bufremove", event = { "BufReadPre", "BufNewFile" }, version = "*" },
+  {
+    'echasnovski/mini.splitjoin',
+    event = { "BufReadPre", "BufNewFile" },
+    version = '*',
+    config = function(_, opts)
+      require("mini.splitjoin").setup(opts)
+    end
+  },
+  {
+    "echasnovski/mini.icons",
+    version = "*",
+    opts = {},
+    lazy = true,
+    specs = { { "nvim-tree/nvim-web-devicons", enabled = false, optional = true }, },
+    init = function()
+      package.preload["nvim-web-devicons"] = function()
+        require("mini.icons").mock_nvim_web_devicons()
+        return package.loaded["nvim-web-devicons"]
+      end
+    end,
+  },
   {
     'echasnovski/mini.tabline',
     version = '*',
-
     event = "UIEnter",
     keys = {
       { "<S-h>",      ":bprev<CR>",      desc = "Previous buffer",                  mode = "n" },
-
       { "<S-l>",      ":bprev<CR>",      desc = "Next buffer",                      mode = "n" },
       { "<leader>tx", ":bdelete<CR>",    desc = "Close current buffer",             mode = "n" },
       { "<leader>tc", ":%bd|e#|bd#<CR>", desc = "Close all buffers except current", mode = "n" },
@@ -19,7 +38,8 @@ return {
       format = function(buf_id, label)
         local suffix = vim.bo[buf_id].modified and '' or ''
         local readonly = vim.bo[buf_id].modifiable and '' or ''
-        return " " .. readonly .. MiniTabline.default_format(buf_id, label) .. suffix .. " "
+        local title = " " .. readonly .. MiniTabline.default_format(buf_id, label) .. suffix .. " "
+        return title
       end
     },
     config = function(_, opts)
@@ -29,7 +49,7 @@ return {
       vim.api.nvim_set_hl(0, "MiniTablineModifiedCurrent",
         { underline = false, italic = true, bold = true, fg = "#FAB387" })
       vim.api.nvim_set_hl(0, "MiniTablineModifiedHidden", { italic = true, fg = "#F9E2AF" })
-      vim.api.nvim_set_hl(0, "MiniTablineFill", { fg = "#11111B" })
+      vim.api.nvim_set_hl(0, "MiniTablineFill", { fg = "#313244" })
     end
   },
   {
@@ -45,12 +65,12 @@ return {
       local plugin = require("lazy.core.config").spec.plugins["mini.surround"]
       local opts = require("lazy.core.plugin").values(plugin, "opts", false)
       local mappings = {
-        { opts.mappings.add,            desc = "Add Surrounding",                     mode = { "n", "v" } },
-        { opts.mappings.delete,         desc = "Delete Surrounding" },
-        { opts.mappings.find,           desc = "Find Right Surrounding" },
-        { opts.mappings.find_left,      desc = "Find Left Surrounding" },
+        { opts.mappings.add,            desc = "Add [S]urrounding",                   mode = { "n", "v" } },
+        { opts.mappings.delete,         desc = "[D]elete [S]urrounding" },
+        { opts.mappings.find,           desc = "[F]ind Right [S]urrounding" },
+        { opts.mappings.find_left,      desc = "Find Left [S]urrounding" },
         { opts.mappings.highlight,      desc = "Highlight Surrounding" },
-        { opts.mappings.replace,        desc = "Replace Surrounding" },
+        { opts.mappings.replace,        desc = "[C]hange [S]urrounding" },
         { opts.mappings.update_n_lines, desc = "Update `MiniSurround.config.n_lines`" },
       }
       mappings = vim.tbl_filter(function(m)
@@ -60,13 +80,13 @@ return {
     end,
     opts = {
       mappings = {
-        add = "gsa",            -- Add surrounding in Normal and Visual modes
-        delete = "gsd",         -- Delete surrounding
-        find = "gsf",           -- Find surrounding (to the right)
-        find_left = "gsF",      -- Find surrounding (to the left)
-        highlight = "gsh",      -- Highlight surrounding
-        replace = "gsr",        -- Replace surrounding
-        update_n_lines = "gsn", -- Update `n_lines`
+        add = "S",           -- Add surrounding in Normal and Visual modes
+        delete = "ds",       -- Delete surrounding
+        find = "fs",         -- Find surrounding (to the right)
+        find_left = "Fs",    -- Find surrounding (to the left)
+        highlight = "",      -- Highlight surrounding
+        replace = "cs",      -- Replace surrounding
+        update_n_lines = "", -- Update `n_lines`
       },
     },
   },
