@@ -2,7 +2,7 @@ return {
   "kndndrj/nvim-dbee",
   dependencies = {
     "MunifTanjim/nui.nvim",
-    "MattiasMTS/cmp-dbee",
+    -- "MattiasMTS/cmp-dbee",
   },
   build = function()
     -- Install tries to automatically detect the install method.

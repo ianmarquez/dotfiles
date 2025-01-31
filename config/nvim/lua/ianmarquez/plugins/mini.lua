@@ -1,5 +1,17 @@
 return {
-  { "echasnovski/mini.bufremove", event = { "BufReadPre", "BufNewFile" }, version = "*" },
+  {
+    "echasnovski/mini.bufremove",
+    version = "*",
+    event = { "BufReadPre", "BufNewFile" },
+  },
+  {
+    'echasnovski/mini.notify',
+    version = '*',
+    lazy = true,
+    config = function()
+      require("mini.notify").setup()
+    end
+  },
   {
     'echasnovski/mini.splitjoin',
     event = { "BufReadPre", "BufNewFile" },
@@ -24,7 +36,7 @@ return {
   {
     'echasnovski/mini.tabline',
     version = '*',
-    event = "UIEnter",
+    event = { "BufReadPre", "BufNewFile" },
     keys = {
       { "<S-h>",      ":bprev<CR>",      desc = "Previous buffer",                  mode = "n" },
       { "<S-l>",      ":bprev<CR>",      desc = "Next buffer",                      mode = "n" },
@@ -55,10 +67,12 @@ return {
   {
     "echasnovski/mini.pairs",
     event = { "BufReadPre", "BufNewFile" },
+    version = "*",
     opts = {},
   },
   {
     "echasnovski/mini.surround",
+    version = "*",
     event = { "BufReadPre", "BufNewFile" },
     keys = function(_, keys)
       -- Populate the keys based on the user's options
@@ -92,6 +106,7 @@ return {
   },
   {
     "echasnovski/mini.comment",
+    version = "*",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "JoosepAlviste/nvim-ts-context-commentstring",

@@ -29,26 +29,20 @@ local blink_config = function()
       -- optional: provides snippets for the snippet source
       dependencies = {
         { 'rafamadriz/friendly-snippets' },
-        {
-          "MattiasMTS/cmp-dbee",
-          dependencies = "kndndrj/nvim-dbee",
-          ft = "sql", -- optional but good to have
-          opts = {},  -- needed
-        },
       },
       version = '*',
       ---@module 'blink.cmp'
       ---@type blink.cmp.Config
       opts = {
         sources = {
-          default = { 'lsp', 'path', 'snippets', 'buffer', 'dbee' },
-          providers = {
-            dbee = {
-              name = "cmp-dbee",
-              module = 'blink.compat.source',
-              score_offset = 1,
-            }
-          }
+          default = { 'lsp', 'path', 'snippets', 'buffer' },
+          -- providers = {
+          --   dbee = {
+          --     name = "cmp-dbee",
+          --     module = 'blink.compat.source',
+          --     score_offset = 1,
+          --   }
+          -- }
         },
         completion = {
           menu = { border = 'single' },

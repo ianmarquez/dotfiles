@@ -1,3 +1,4 @@
+-- if true then return {} end
 return {
   "folke/noice.nvim",
   dependencies = {
@@ -42,7 +43,7 @@ return {
       view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
     },
     messages = {
-      enabled = true,
+      enabled = false,
       view = "mini",               -- default view for messages
       view_error = "mini",         -- view for errors
       view_warn = "mini",          -- view for warnings
