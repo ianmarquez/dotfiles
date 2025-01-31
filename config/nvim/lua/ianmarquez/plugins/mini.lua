@@ -64,10 +64,10 @@ return {
     version = '*',
     event = { "BufReadPre", "BufNewFile" },
     keys = {
-      { "<S-h>",      ":bprev<CR>",      desc = "Previous buffer",                  mode = "n" },
-      { "<S-l>",      ":bprev<CR>",      desc = "Next buffer",                      mode = "n" },
-      { "<leader>tx", ":bdelete<CR>",    desc = "Close current buffer",             mode = "n" },
-      { "<leader>tc", ":%bd|e#|bd#<CR>", desc = "Close all buffers except current", mode = "n" },
+      { "<S-h>",      ":bprev<CR>",          desc = "Previous buffer",                  mode = "n" },
+      { "<S-l>",      ":bprev<CR>",          desc = "Next buffer",                      mode = "n" },
+      { "<leader>tx", ":bdelete<CR>",        desc = "Close current buffer",             mode = "n" },
+      { "<leader>tc", ":%bd|e#|bd#<CR><CR>", desc = "Close all buffers except current", mode = "n" },
     },
     opts = {
       show_icons = true,
