@@ -1,10 +1,14 @@
 return {
+	{ "echasnovski/mini.move", version = "*", opts = {}, event = { "BufReadPre", "BufNewFile" } },
+	{ "echasnovski/mini.bufremove", version = "*", opts = {}, event = { "BufReadPre", "BufNewFile" } },
+	{ "echasnovski/mini.splitjoin", version = "*", opts = {}, event = { "BufReadPre", "BufNewFile" } },
+	{ "echasnovski/mini.pairs", version = "*", opts = {}, event = { "BufReadPre", "BufNewFile" } },
+	{ "echasnovski/mini.icons", version = "*", opts = { style = "glyph" }, lazy = true },
 	{
-		"echasnovski/mini.move",
+		"echasnovski/mini.comment",
 		version = "*",
-
 		event = { "BufReadPre", "BufNewFile" },
-		opts = {},
+		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
 	},
 	{
 		"echasnovski/mini.hipatterns",
@@ -22,35 +26,6 @@ return {
 				},
 			})
 		end,
-	},
-	{
-		"echasnovski/mini.bufremove",
-		version = "*",
-		event = { "BufReadPre", "BufNewFile" },
-		opts = {},
-	},
-	{
-		"echasnovski/mini.splitjoin",
-		event = { "BufReadPre", "BufNewFile" },
-		version = "*",
-		config = function(_, opts)
-			require("mini.splitjoin").setup(opts)
-		end,
-	},
-	{
-		"echasnovski/mini.icons",
-		version = "*",
-		opts = {
-			style = "glyph",
-		},
-		lazy = true,
-		-- specs = { { "nvim-tree/nvim-web-devicons", enabled = false, optional = true } },
-		-- init = function()
-		-- 	package.preload["nvim-web-devicons"] = function()
-		-- 		require("mini.icons").mock_nvim_web_devicons()
-		-- 		return package.loaded["nvim-web-devicons"]
-		-- 	end
-		-- end,
 	},
 	{
 		"echasnovski/mini.tabline",
@@ -90,12 +65,6 @@ return {
 		end,
 	},
 	{
-		"echasnovski/mini.pairs",
-		event = { "BufReadPre", "BufNewFile" },
-		version = "*",
-		opts = {},
-	},
-	{
 		"echasnovski/mini.surround",
 		version = "*",
 		event = { "BufReadPre", "BufNewFile" },
@@ -127,14 +96,6 @@ return {
 				replace = "cs", -- Replace surrounding
 				update_n_lines = "", -- Update `n_lines`
 			},
-		},
-	},
-	{
-		"echasnovski/mini.comment",
-		version = "*",
-		event = { "BufReadPre", "BufNewFile" },
-		dependencies = {
-			"JoosepAlviste/nvim-ts-context-commentstring",
 		},
 	},
 }

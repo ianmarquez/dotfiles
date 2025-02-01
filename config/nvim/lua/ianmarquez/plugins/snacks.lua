@@ -8,13 +8,10 @@ return {
 				{ section = "header" },
 				{ section = "keys", gap = 1 },
 				{ icon = " ", title = "Projects", section = "projects", padding = { 2, 1 } },
-				-- { icon = " ", title = "Recent Files", section = "recent_files", indent = 1, padding = 1 },
 				{ section = "startup" },
 			},
 		},
-		explorer = {
-			replace_netrw = true, -- Replace netrw with the snacks explorer
-		},
+		explorer = { replace_netrw = true },
 		input = { position = "bottom" },
 		notifier = { timeout = 1500 },
 		notify = {},
@@ -47,7 +44,9 @@ return {
 		quickfile = {},
 		rename = {},
 		scope = {},
-		terminal = {},
+		terminal = {
+			win = { wo = { winbar = "" } },
+		},
 		styles = {
 			notification = {
 				wo = { wrap = true }, -- Wrap notifications
@@ -88,7 +87,7 @@ return {
 			function()
 				require("snacks").lazygit()
 			end,
-			desc = "Lazygit",
+			desc = "Lazygit (Terminal)",
 		},
 		{
 			"<leader>gf",
