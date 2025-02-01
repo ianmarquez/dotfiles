@@ -20,5 +20,5 @@ require("lazy").setup({ { import = "ianmarquez.plugins" }, { import = "ianmarque
 		colorscheme = { "catpuccin" },
 	},
 	checker = { enabled = true },
-	change_detection = { enabled = true },
+	change_detection = { enabled = true, notify = false },
 })

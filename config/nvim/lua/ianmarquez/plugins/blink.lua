@@ -35,7 +35,7 @@ local blink_config = function()
 				{ "rafamadriz/friendly-snippets" },
 			},
 			lazy = true,
-			event = "UIEnter",
+			event = "VeryLazy",
 			version = "*",
 			---@module 'blink.cmp'
 			---@type blink.cmp.Config

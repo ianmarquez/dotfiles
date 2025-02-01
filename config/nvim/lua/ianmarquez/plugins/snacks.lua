@@ -1,6 +1,5 @@
 return {
 	"folke/snacks.nvim",
-	priority = 1000,
 	lazy = false,
 	opts = {
 		dashboard = {
@@ -21,10 +20,9 @@ return {
 			sources = {
 				explorer = {
 					jump = { close = true },
-					focus = "input",
 					layout = {
 						layout = {
-							backdrop = true,
+							backdrop = false,
 							width = 40,
 							min_width = 40,
 							height = 0,
@@ -38,7 +36,7 @@ return {
 								title = " File Explorer {flags}",
 								title_pos = "left",
 							},
-							{ win = "list", border = "none" },
+							{ win = "list", border = "none", title = " File Explorer {flags}", title_pos = "left" },
 						},
 					},
 				},
