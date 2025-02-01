@@ -12,10 +12,39 @@ return {
 				{ section = "startup" },
 			},
 		},
+		explorer = {
+			replace_netrw = true, -- Replace netrw with the snacks explorer
+		},
 		input = { position = "bottom" },
 		notifier = { timeout = 1500 },
 		notify = {},
-		picker = {},
+		picker = {
+			sources = {
+				explorer = {
+					auto_close = true,
+					layout = {
+						layout = {
+							backdrop = false,
+							width = 40,
+							min_width = 40,
+							height = 0,
+							position = "right",
+							border = "none",
+							box = "vertical",
+							{
+								win = "input",
+								height = 1,
+								border = "rounded",
+								title = "{title} {live} {flags}",
+								title_pos = "center",
+							},
+							{ win = "list", border = "none" },
+							{ win = "preview", title = "{preview}", height = 0.4, border = "top" },
+						},
+					},
+				},
+			},
+		},
 		quickfile = {},
 		rename = {},
 		scope = {},
@@ -136,9 +165,9 @@ return {
 		{
 			"<leader>fh",
 			function()
-				require("snacks").picker.highlights()
+				require("snacks").picker.help()
 			end,
-			desc = "Highlights",
+			desc = "Help",
 		},
 		{
 			"gf",
@@ -160,6 +189,12 @@ return {
 				require("snacks").picker.lsp_definitions()
 			end,
 			desc = "Show Definitions",
+		},
+		{
+			"<leader>e",
+			function()
+				require("snacks").explorer({ hidden = true })
+			end,
 		},
 	},
 }

@@ -29,14 +29,6 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {},
 	},
-	-- {
-	--   'echasnovski/mini.notify',
-	--   version = '*',
-	--   lazy = true,
-	--   config = function()
-	--     require("mini.notify").setup()
-	--   end
-	-- },
 	{
 		"echasnovski/mini.splitjoin",
 		event = { "BufReadPre", "BufNewFile" },
@@ -66,7 +58,7 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		keys = {
 			{ "<S-h>", ":bprev<CR>", desc = "Previous buffer", mode = "n" },
-			{ "<S-l>", ":bprev<CR>", desc = "Next buffer", mode = "n" },
+			{ "<S-l>", ":bnext<CR>", desc = "Next buffer", mode = "n" },
 			{ "<leader>tx", ":bdelete<CR>", desc = "Close current buffer", mode = "n" },
 			{ "<leader>tc", ":%bd|e#|bd#<CR><CR>", desc = "Close all buffers except current", mode = "n" },
 		},
