@@ -32,10 +32,10 @@ return {
 		version = "*",
 		event = { "BufReadPre", "BufNewFile" },
 		keys = {
-			{ "<S-h>", ":bprev<CR>", desc = "Previous buffer", mode = "n" },
-			{ "<S-l>", ":bnext<CR>", desc = "Next buffer", mode = "n" },
-			{ "<leader>tx", ":bdelete<CR>", desc = "Close current buffer", mode = "n" },
-			{ "<leader>tc", ":%bd|e#|bd#<CR><CR>", desc = "Close all buffers except current", mode = "n" },
+			{ "<S-h>", ":bprev<CR>", desc = "Previous buffer (Tabs)", mode = "n" },
+			{ "<S-l>", ":bnext<CR>", desc = "Next buffer (Tabs)", mode = "n" },
+			{ "<leader>tx", ":bdelete<CR>", desc = "Close current buffer (Tabs)", mode = "n" },
+			{ "<leader>tc", ":%bd|e#|bd#<CR><CR>", desc = "Close all buffers except current (Tabs)", mode = "n" },
 		},
 		opts = {
 			show_icons = true,
@@ -73,13 +73,13 @@ return {
 			local plugin = require("lazy.core.config").spec.plugins["mini.surround"]
 			local opts = require("lazy.core.plugin").values(plugin, "opts", false)
 			local mappings = {
-				{ opts.mappings.add, desc = "Add [S]urrounding", mode = { "n", "v" } },
-				{ opts.mappings.delete, desc = "[D]elete [S]urrounding" },
-				{ opts.mappings.find, desc = "[F]ind Right [S]urrounding" },
-				{ opts.mappings.find_left, desc = "Find Left [S]urrounding" },
-				{ opts.mappings.highlight, desc = "Highlight Surrounding" },
-				{ opts.mappings.replace, desc = "[C]hange [S]urrounding" },
-				{ opts.mappings.update_n_lines, desc = "Update `MiniSurround.config.n_lines`" },
+				{ opts.mappings.add, desc = "Add [S]urrounding (Surround)", mode = { "n", "v" } },
+				{ opts.mappings.delete, desc = "[D]elete [S]urrounding (Surround)" },
+				{ opts.mappings.find, desc = "[F]ind Right [S]urrounding (Surround)" },
+				{ opts.mappings.find_left, desc = "Find Left [S]urrounding (Surround)" },
+				{ opts.mappings.highlight, desc = "Highlight Surrounding (Surround)" },
+				{ opts.mappings.replace, desc = "[C]hange [S]urrounding (Surround)" },
+				{ opts.mappings.update_n_lines, desc = "Update `MiniSurround.config.n_lines` (Surround)" },
 			}
 			mappings = vim.tbl_filter(function(m)
 				return m[1] and #m[1] > 0

@@ -66,7 +66,7 @@ return {
 			function()
 				require("snacks").terminal.toggle("lazydocker")
 			end,
-			desc = "LazyDocker",
+			desc = "LazyDocker (Terminal)",
 		},
 		{
 			"<leader>gb",
@@ -94,28 +94,28 @@ return {
 			function()
 				require("snacks").lazygit.log_file()
 			end,
-			desc = "Lazygit Current File History",
+			desc = "Lazygit Current File History (Terminal)",
 		},
 		{
 			"<leader>gl",
 			function()
 				require("snacks").lazygit.log()
 			end,
-			desc = "Lazygit Log (cwd)",
+			desc = "Lazygit Log (cwd) (Terminal)",
 		},
 		{
 			"<leader>nd",
 			function()
 				require("snacks").notifier.hide()
 			end,
-			desc = "Dismiss Notifications",
+			desc = "Dismiss Notifications (Notifications)",
 		},
 		{
 			"<leader>nn",
 			function()
 				require("snacks").notifier.show_history()
 			end,
-			desc = "Show Notifications",
+			desc = "Show Notifications (Notifications)",
 		},
 
 		{

@@ -17,12 +17,20 @@ return {
 				group = "Pickers",
 			},
 			{
+				"<C-w>",
+				group = "Window Control",
+			},
+			{
 				"<leader>w",
 				group = "Window Control",
 			},
 			{
+				"<leader>n",
+				group = "Notification",
+			},
+			{
 				"<leader>d",
-				group = "DiffView/Diagnostics",
+				group = "DiffView/Diagnostics/Dropbar",
 			},
 			{
 				"<leader>m",
