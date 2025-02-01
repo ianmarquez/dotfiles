@@ -20,7 +20,6 @@ return {
 			sources = {
 				explorer = {
 					jump = { close = true },
-					focus = "input",
 					layout = {
 						layout = {
 							backdrop = false,
