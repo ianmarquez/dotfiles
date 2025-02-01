@@ -11,17 +11,20 @@ return {
 				{ section = "startup" },
 			},
 		},
-		explorer = { replace_netrw = true },
+		explorer = {
+			replace_netrw = true,
+		},
 		input = { position = "bottom" },
 		notifier = { timeout = 1500 },
 		notify = {},
 		picker = {
 			sources = {
 				explorer = {
-					auto_close = true,
+					jump = { close = true },
+					focus = "input",
 					layout = {
 						layout = {
-							backdrop = false,
+							backdrop = true,
 							width = 40,
 							min_width = 40,
 							height = 0,
