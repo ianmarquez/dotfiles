@@ -4,7 +4,8 @@ source ~/.zshrc
 
 brew install zinit
 brew install git
-brew install nvim
+brew install cmake
+brew install neovim
 brew install wezterm
 brew install --cask font-meslo-lg-nerd-font
 brew install --cask font-jetbrains-mono-nerd-font

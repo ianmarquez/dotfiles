@@ -28,3 +28,10 @@ keymap.set("n", "<M-h>", "<C-w>5<", { desc = "Adjust Split to Left (Window)" })
 keymap.set("n", "<M-l>", "<C-w>5>", { desc = "Adjust Split to Right (Window)" })
 keymap.set("n", "<M-j>", "<C-w>5+", { desc = "Adjust Split Down (Window)" })
 keymap.set("n", "<M-k>", "<C-w>5-", { desc = "Adjust Split to Up (Window)" })
+
+vim.keymap.set("", "<leader>dl", function()
+	vim.diagnostic.config({
+		virtual_lines = not vim.diagnostic.config().virtual_lines,
+		virtual_text = not vim.diagnostic.config().virtual_text,
+	})
+end, { desc = "Show [d]iagnostic [l]ines" })
