@@ -113,14 +113,14 @@ return {
 			function()
 				require("snacks").notifier.hide()
 			end,
-			desc = "Dismiss Notifications (Notifications)",
+			desc = "[N]otifications [D]ismiss (Notifications)",
 		},
 		{
 			"<leader>nn",
 			function()
 				require("snacks").notifier.show_history()
 			end,
-			desc = "Show Notifications (Notifications)",
+			desc = "[N]otificatio[n]s show (Notifications)",
 		},
 
 		{
@@ -128,76 +128,84 @@ return {
 			function()
 				require("snacks").picker.grep({ hidden = true })
 			end,
-			desc = "Live Grep",
+			desc = "[F]ind [S]tring (Picker)",
 		},
 		{
 			"<leader>fc",
 			function()
 				require("snacks").picker.grep_buffers()
 			end,
-			desc = "Live Grep Current Buffer",
+			desc = "[F]ind in [C]urrent Buffer (Picker)",
 		},
 		{
 			"<leader>fb",
 			function()
 				require("snacks").picker.buffers()
 			end,
-			desc = "Buffers",
+			desc = "[F]ind [B]uffers (Picker)",
 		},
 		{
 			"<leader>ff",
 			function()
 				require("snacks").picker.files({ hidden = true })
 			end,
-			desc = "Files",
+			desc = "[F]ind [F]iles (Picker)",
 		},
 		{
 			"<leader>o",
 			function()
 				require("snacks").picker.lsp_symbols()
 			end,
-			desc = "Symbols in Current File",
+			desc = "Sh[o]w Symbols in Current File (Picker)",
 		},
 		{
 			"<leader>fk",
 			function()
 				require("snacks").picker.keymaps()
 			end,
-			desc = "Keymaps",
+			desc = "[F]ind [K]eymaps (Picker)",
 		},
 		{
 			"<leader>fh",
 			function()
 				require("snacks").picker.help()
 			end,
-			desc = "Help",
+			desc = "[F]ind [H]elp documents (Picker)",
 		},
 		{
 			"gf",
 			function()
 				require("snacks").picker.lsp_references()
 			end,
-			desc = "Show LSP references",
+			desc = "[G]o LSP re[f]erences (Picker)",
 		},
 		{
 			"gD",
 			function()
 				require("snacks").picker.lsp_type_definitions()
 			end,
-			desc = "Show Type Definitions",
+			desc = "[G]o Type [D]efinitions (Picker)",
 		},
 		{
 			"gd",
 			function()
 				require("snacks").picker.lsp_definitions()
 			end,
-			desc = "Show Definitions",
+			desc = "[G]o [d]efinitions (Picker)",
+		},
+		{
+			"<leader>fu",
+			function()
+				require("snacks").picker.undo()
+			end,
+			desc = "[F]ind [U]ndo",
 		},
 		{
 			"<leader>e",
 			function()
 				require("snacks").explorer({ hidden = true })
 			end,
+			desc = "Toggle [e]xplorer (Explorer)",
 		},
 	},
 }

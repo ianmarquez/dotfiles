@@ -37,8 +37,6 @@ local blink_config = function()
 			lazy = true,
 			event = "VeryLazy",
 			version = "*",
-			---@module 'blink.cmp'
-			---@type blink.cmp.Config
 			opts = {
 				sources = {
 					default = { "lsp", "path", "snippets", "buffer" },
