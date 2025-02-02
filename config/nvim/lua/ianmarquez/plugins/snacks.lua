@@ -46,7 +46,11 @@ return {
 		rename = {},
 		scope = {},
 		terminal = {
-			win = { wo = { winbar = "" } },
+			win = {
+				wo = { winbar = "" },
+				border = "rounded",
+				-- position = "float",
+			},
 		},
 		styles = {
 			notification = {
