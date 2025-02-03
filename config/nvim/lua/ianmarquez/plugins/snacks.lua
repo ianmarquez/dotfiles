@@ -13,7 +13,7 @@ return {
 		explorer = {
 			replace_netrw = true,
 		},
-		input = { position = "bottom" },
+		input = { position = "bottom", win = { style = { row = 10 } } },
 		notifier = { timeout = 1500 },
 		notify = {},
 		picker = {

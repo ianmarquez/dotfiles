@@ -63,6 +63,7 @@ return {
 				vim.ui.input({
 					prompt = prompt,
 					prompt_pos = "left",
+					icon = "",
 				}, function(input)
 					if input then
 						local cmd = buffCmd .. input
