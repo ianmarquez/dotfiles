@@ -83,7 +83,7 @@ return {
 				local suffix = vim.bo[buf_id].modified and "" or ""
 				local readonly = vim.bo[buf_id].modifiable and "" or ""
 				local ordinal = showOrdinal and "[" .. buf_id .. "]" or ""
-				local title = " " .. readonly .. ordinal .. tabline.default_format(buf_id, label) .. suffix .. " "
+				local title = readonly .. ordinal .. tabline.default_format(buf_id, label) .. suffix
 				return title
 			end
 
@@ -91,21 +91,37 @@ return {
 			tabline.setup(opts)
 
 			local processByOrdinal = function(buffCmd, prompt)
+				local bufs = {}
+				local bufNames = {}
+
+				for _, bufnr in pairs(vim.api.nvim_list_bufs()) do
+					local condition = vim.api.nvim_get_option_value("buflisted", { buf = bufnr })
+					if condition == true then
+						local bufName = format(bufnr, vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":t"), true)
+						bufs[bufName] = bufnr
+						table.insert(bufNames, bufName)
+					end
+				end
+
 				opts.format = function(buf_id, label)
 					return format(buf_id, label, true)
 				end
+
 				tabline.setup(opts)
-				vim.ui.input({
+
+				table.sort(bufNames, function(a, b)
+					return a:lower() < b:lower()
+				end)
+
+				vim.ui.select(bufNames, {
 					prompt = prompt,
-					prompt_pos = "left",
-					icon = "",
-				}, function(input)
-					if input then
-						local cmd = buffCmd .. input
-						vim.cmd(cmd)
-					end
+				}, function(choice)
 					opts.format = format
 					tabline.setup(opts)
+					if choice ~= nil then
+						local cmd = buffCmd .. bufs[choice]
+						vim.cmd(cmd)
+					end
 				end)
 			end
 
