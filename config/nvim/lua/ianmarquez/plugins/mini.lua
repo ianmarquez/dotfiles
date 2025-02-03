@@ -126,11 +126,11 @@ return {
 			end
 
 			vim.keymap.set("n", "<leader>tx", function()
-				processByOrdinal("bdelete", "Close buffer:")
+				processByOrdinal("bdelete", " Close buffer:")
 			end, { desc = "Close buffer by ordinal [Tabs]" })
 
 			vim.keymap.set("n", "<leader>tt", function()
-				processByOrdinal("b", "Go to buffer:")
+				processByOrdinal("b", " Go to buffer:")
 			end, { desc = "Go to buffer by ordinal [Tabs]" })
 
 			vim.api.nvim_set_hl(0, "MiniTablineCurrent", { underline = false, italic = true, bold = true })
