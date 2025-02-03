@@ -34,7 +34,7 @@ return {
 		keys = {
 			{ "<S-h>", ":bprev<CR>", desc = "Previous buffer (Tabs)", mode = "n" },
 			{ "<S-l>", ":bnext<CR>", desc = "Next buffer (Tabs)", mode = "n" },
-			{ "<leader>tx", ":bdelete<CR>", desc = "Close current buffer (Tabs)", mode = "n" },
+			{ "<leader>tx", ":bdelete", desc = "Close current buffer (Tabs)", mode = "n" },
 			{ "<leader>tc", ":%bd|e#|bd#<CR><CR>", desc = "Close all buffers except current (Tabs)", mode = "n" },
 		},
 		opts = {
@@ -47,7 +47,14 @@ return {
 			opts.format = function(buf_id, label)
 				local suffix = vim.bo[buf_id].modified and "" or ""
 				local readonly = vim.bo[buf_id].modifiable and "" or ""
-				local title = " " .. readonly .. tabline.default_format(buf_id, label) .. suffix .. " "
+				local title = " "
+					.. readonly
+					.. "["
+					.. buf_id
+					.. "]"
+					.. tabline.default_format(buf_id, label)
+					.. suffix
+					.. " "
 				return title
 			end
 
