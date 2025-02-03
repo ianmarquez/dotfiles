@@ -34,7 +34,6 @@ return {
 		keys = {
 			{ "<S-h>", ":bprev<CR>", desc = "Previous buffer (Tabs)", mode = "n" },
 			{ "<S-l>", ":bnext<CR>", desc = "Next buffer (Tabs)", mode = "n" },
-			{ "<leader>tx", ":bdelete", desc = "Close current buffer (Tabs)", mode = "n" },
 			{ "<leader>tc", ":%bd|e#|bd#<CR><CR>", desc = "Close all buffers except current (Tabs)", mode = "n" },
 		},
 		opts = {
@@ -44,21 +43,42 @@ return {
 		},
 		config = function(_, opts)
 			local tabline = require("mini.tabline")
-			opts.format = function(buf_id, label)
+
+			local function format(buf_id, label, showOrdinal)
 				local suffix = vim.bo[buf_id].modified and "" or ""
 				local readonly = vim.bo[buf_id].modifiable and "" or ""
-				local title = " "
-					.. readonly
-					.. "["
-					.. buf_id
-					.. "]"
-					.. tabline.default_format(buf_id, label)
-					.. suffix
-					.. " "
+				local ordinal = showOrdinal and "[" .. buf_id .. "]" or ""
+				local title = " " .. readonly .. ordinal .. tabline.default_format(buf_id, label) .. suffix .. " "
 				return title
 			end
 
+			opts.format = format
 			tabline.setup(opts)
+
+			local processByOrdinal = function(buffCmd, prompt)
+				opts.format = function(buf_id, label)
+					return format(buf_id, label, true)
+				end
+				tabline.setup(opts)
+				vim.ui.input({
+					prompt = prompt,
+				}, function(input)
+					if input then
+						local cmd = buffCmd .. input
+						vim.cmd(cmd)
+					end
+					opts.format = format
+					tabline.setup(opts)
+				end)
+			end
+
+			vim.keymap.set("n", "<leader>tx", function()
+				processByOrdinal("bdelete", "Tab ordinal to close")
+			end, { desc = "Close buffer by ordinal [Tabs]" })
+
+			vim.keymap.set("n", "<leader>tt", function()
+				processByOrdinal("b", "Go to tab")
+			end, { desc = "Go to buffer by ordinal [Tabs]" })
 
 			vim.api.nvim_set_hl(0, "MiniTablineCurrent", { underline = false, italic = true, bold = true })
 			vim.api.nvim_set_hl(0, "MiniTablineHidden", { fg = "#6C7086", bg = "#181825" })

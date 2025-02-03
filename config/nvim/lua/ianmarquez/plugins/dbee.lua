@@ -10,9 +10,7 @@ return {
 		--    "curl", "wget", "bitsadmin", "go"
 		require("dbee").install()
 	end,
-	config = function()
-		require("dbee").setup( --[[optional config]])
-	end,
+	config = true,
 	keys = {
 		{ "<leader>db", "<cmd>Dbee toggle<cr>", desc = "Toggle DB (Database)" },
 	},
