@@ -46,9 +46,30 @@ return {
 		version = "*",
 		event = { "BufReadPre", "BufNewFile" },
 		keys = {
-			{ "<S-h>", ":bprev<CR>", desc = "Previous buffer (Tabs)", mode = "n" },
-			{ "<S-l>", ":bnext<CR>", desc = "Next buffer (Tabs)", mode = "n" },
-			{ "<leader>tc", ":%bd|e#|bd#<CR><CR>", desc = "Close all buffers except current (Tabs)", mode = "n" },
+			{
+				"<S-h>",
+				function()
+					vim.cmd([[bprev]])
+				end,
+				desc = "Previous buffer (Tabs)",
+				mode = "n",
+			},
+			{
+				"<S-l>",
+				function()
+					vim.cmd([[bnext]])
+				end,
+				desc = "Next buffer (Tabs)",
+				mode = "n",
+			},
+			{
+				"<leader>tc",
+				function()
+					vim.cmd([[:%bd|e#|bd#]])
+				end,
+				desc = "Close all buffers except current (Tabs)",
+				mode = "n",
+			},
 		},
 		opts = {
 			show_icons = true,
