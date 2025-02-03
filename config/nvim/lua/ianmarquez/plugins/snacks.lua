@@ -1,5 +1,3 @@
-vim.api.nvim_set_hl(0, "SnacksPickerTitle", { fg = "#89dceb" })
-
 return {
 	"folke/snacks.nvim",
 	lazy = false,
@@ -60,6 +58,9 @@ return {
 			},
 		},
 	},
+	init = function()
+		vim.api.nvim_set_hl(0, "SnacksPickerTitle", { fg = "#89dceb" })
+	end,
 	keys = {
 		{
 			"<c-/>",

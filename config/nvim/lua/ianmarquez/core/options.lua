@@ -33,6 +33,9 @@ opt.signcolumn = "yes"
 -- scrolling
 opt.scrolloff = 10
 
+-- mouse
+opt.mouse = ""
+
 -- backspace
 opt.backspace = "indent,eol,start"
 
