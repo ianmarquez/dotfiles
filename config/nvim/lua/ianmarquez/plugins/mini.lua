@@ -1,4 +1,72 @@
-return {
+local P = {}
+
+P.tabline = {
+	instance = nil,
+	bufs = {},
+	bufNames = {},
+
+	format = function(buf_id, label, showOrdinal)
+		local suffix = vim.bo[buf_id].modified and "" or ""
+		local readonly = vim.bo[buf_id].modifiable and "" or ""
+		local ordinal = showOrdinal and "[" .. buf_id .. "]" or ""
+		local title = readonly .. ordinal .. P.tabline.instance.default_format(buf_id, label) .. suffix
+		return title
+	end,
+
+	buildBufNameTable = function()
+		P.tabline.bufNames = {}
+		P.tabline.bufs = {}
+		for _, bufnr in pairs(vim.api.nvim_list_bufs()) do
+			local condition = vim.api.nvim_get_option_value("buflisted", { buf = bufnr })
+			if condition == true then
+				local bufName =
+					P.tabline.format(bufnr, vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":t"), true)
+				P.tabline.bufs[bufName] = bufnr
+				table.insert(P.tabline.bufNames, bufName)
+			end
+		end
+	end,
+
+	processByOrdinal = function(buffCmd, prompt, opts)
+		P.tabline.buildBufNameTable()
+
+		opts.format = function(buf_id, label)
+			return P.tabline.format(buf_id, label, true)
+		end
+
+		P.tabline.instance.setup(opts)
+
+		table.sort(P.tabline.bufNames, function(a, b)
+			return a:lower() < b:lower()
+		end)
+
+		vim.ui.select(P.tabline.bufNames, {
+			prompt = prompt,
+		}, function(choice)
+			opts.format = P.tabline.format
+			P.tabline.instance.setup(opts)
+			if choice ~= nil then
+				local cmd = buffCmd .. P.tabline.bufs[choice]
+				vim.cmd(cmd)
+			end
+		end)
+	end,
+
+	setHlColors = function()
+		-- Follows catpuccin mocha colors
+		vim.api.nvim_set_hl(0, "MiniTablineCurrent", { underline = false, italic = true, bold = true })
+		vim.api.nvim_set_hl(0, "MiniTablineHidden", { fg = "#6C7086", bg = "#181825" })
+		vim.api.nvim_set_hl(
+			0,
+			"MiniTablineModifiedCurrent",
+			{ underline = false, italic = true, bold = true, fg = "#FAB387" }
+		)
+		vim.api.nvim_set_hl(0, "MiniTablineModifiedHidden", { italic = true, fg = "#F9E2AF", bg = "#181825" })
+		vim.api.nvim_set_hl(0, "MiniTablineFill", { bg = "#11111b" })
+	end,
+}
+
+P.config = {
 	{ "echasnovski/mini.move", version = "*", opts = {}, event = { "BufReadPre", "BufNewFile" } },
 	{ "echasnovski/mini.bufremove", version = "*", opts = {}, event = { "BufReadPre", "BufNewFile" } },
 	{ "echasnovski/mini.splitjoin", version = "*", opts = {}, event = { "BufReadPre", "BufNewFile" } },
@@ -78,70 +146,20 @@ return {
 		},
 		config = function(_, opts)
 			local tabline = require("mini.tabline")
+			P.tabline.instance = tabline
 
-			local function format(buf_id, label, showOrdinal)
-				local suffix = vim.bo[buf_id].modified and "" or ""
-				local readonly = vim.bo[buf_id].modifiable and "" or ""
-				local ordinal = showOrdinal and "[" .. buf_id .. "]" or ""
-				local title = readonly .. ordinal .. tabline.default_format(buf_id, label) .. suffix
-				return title
-			end
-
-			opts.format = format
-			tabline.setup(opts)
-
-			local processByOrdinal = function(buffCmd, prompt)
-				local bufs = {}
-				local bufNames = {}
-
-				for _, bufnr in pairs(vim.api.nvim_list_bufs()) do
-					local condition = vim.api.nvim_get_option_value("buflisted", { buf = bufnr })
-					if condition == true then
-						local bufName = format(bufnr, vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":t"), true)
-						bufs[bufName] = bufnr
-						table.insert(bufNames, bufName)
-					end
-				end
-
-				opts.format = function(buf_id, label)
-					return format(buf_id, label, true)
-				end
-
-				tabline.setup(opts)
-
-				table.sort(bufNames, function(a, b)
-					return a:lower() < b:lower()
-				end)
-
-				vim.ui.select(bufNames, {
-					prompt = prompt,
-				}, function(choice)
-					opts.format = format
-					tabline.setup(opts)
-					if choice ~= nil then
-						local cmd = buffCmd .. bufs[choice]
-						vim.cmd(cmd)
-					end
-				end)
-			end
+			opts.format = P.tabline.format
+			P.tabline.instance.setup(opts)
 
 			vim.keymap.set("n", "<leader>tx", function()
-				processByOrdinal("bdelete", " Close buffer:")
+				P.tabline.processByOrdinal("bdelete", " Close buffer:", opts)
 			end, { desc = "Close buffer by ordinal [Tabs]" })
 
 			vim.keymap.set("n", "<leader>tt", function()
-				processByOrdinal("b", " Go to buffer:")
+				P.tabline.processByOrdinal("b", " Go to buffer:", opts)
 			end, { desc = "Go to buffer by ordinal [Tabs]" })
 
-			vim.api.nvim_set_hl(0, "MiniTablineCurrent", { underline = false, italic = true, bold = true })
-			vim.api.nvim_set_hl(0, "MiniTablineHidden", { fg = "#6C7086", bg = "#181825" })
-			vim.api.nvim_set_hl(
-				0,
-				"MiniTablineModifiedCurrent",
-				{ underline = false, italic = true, bold = true, fg = "#FAB387" }
-			)
-			vim.api.nvim_set_hl(0, "MiniTablineModifiedHidden", { italic = true, fg = "#F9E2AF", bg = "#181825" })
-			vim.api.nvim_set_hl(0, "MiniTablineFill", { bg = "#11111b" })
+			P.tabline.setHlColors()
 		end,
 	},
 	{
@@ -179,3 +197,5 @@ return {
 		},
 	},
 }
+
+return P.config
