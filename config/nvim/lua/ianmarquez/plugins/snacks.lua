@@ -18,6 +18,26 @@ return {
 		notify = {},
 		picker = {
 			sources = {
+				select = {
+					focus = "list",
+					layout = {
+						preview = false,
+						layout = {
+							backdrop = true,
+							width = 0.3,
+							min_width = 50,
+							height = 0.4,
+							min_height = 3,
+							box = "vertical",
+							border = "rounded",
+							title = "{title}",
+							title_pos = "left",
+							{ win = "input", height = 1, border = "bottom" },
+							{ win = "list", border = "none" },
+							{ win = "preview", title = "{preview}", height = 0.4, border = "top" },
+						},
+					},
+				},
 				explorer = {
 					jump = { close = true },
 					layout = {
