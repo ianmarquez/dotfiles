@@ -2,8 +2,8 @@ local P = {}
 
 P.tabline = {
 	instance = nil,
-	bufs = {},
-	bufNames = {},
+	buffers = {},
+	buf_names = {},
 
 	format = function(buf_id, label, showOrdinal)
 		local suffix = vim.bo[buf_id].modified and "" or ""
@@ -13,22 +13,22 @@ P.tabline = {
 		return title
 	end,
 
-	buildBufNameTable = function()
-		P.tabline.bufNames = {}
-		P.tabline.bufs = {}
+	build_buffer_name_table = function()
+		P.tabline.buf_names = {}
+		P.tabline.buffers = {}
 		for _, bufnr in pairs(vim.api.nvim_list_bufs()) do
 			local condition = vim.api.nvim_get_option_value("buflisted", { buf = bufnr })
 			if condition == true then
 				local bufName =
 					P.tabline.format(bufnr, vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":t"), true)
-				P.tabline.bufs[bufName] = bufnr
-				table.insert(P.tabline.bufNames, bufName)
+				P.tabline.buffers[bufName] = bufnr
+				table.insert(P.tabline.buf_names, bufName)
 			end
 		end
 	end,
 
-	processByOrdinal = function(buffCmd, prompt, opts)
-		P.tabline.buildBufNameTable()
+	process_by_ordinal = function(buffCmd, prompt, opts)
+		P.tabline.build_buffer_name_table()
 
 		opts.format = function(buf_id, label)
 			return P.tabline.format(buf_id, label, true)
@@ -36,23 +36,20 @@ P.tabline = {
 
 		P.tabline.instance.setup(opts)
 
-		table.sort(P.tabline.bufNames, function(a, b)
-			return a:lower() < b:lower()
-		end)
-
-		vim.ui.select(P.tabline.bufNames, {
+		vim.ui.select(P.tabline.buf_names, {
 			prompt = prompt,
+			main = { current = true },
 		}, function(choice)
 			opts.format = P.tabline.format
 			P.tabline.instance.setup(opts)
 			if choice ~= nil then
-				local cmd = buffCmd .. P.tabline.bufs[choice]
+				local cmd = buffCmd .. P.tabline.buffers[choice]
 				vim.cmd(cmd)
 			end
 		end)
 	end,
 
-	setHlColors = function()
+	set_hl_colors = function()
 		-- Follows catpuccin mocha colors
 		vim.api.nvim_set_hl(0, "MiniTablineCurrent", { underline = false, italic = true, bold = true })
 		vim.api.nvim_set_hl(0, "MiniTablineHidden", { fg = "#6C7086", bg = "#181825" })
@@ -152,14 +149,14 @@ P.config = {
 			P.tabline.instance.setup(opts)
 
 			vim.keymap.set("n", "<leader>tx", function()
-				P.tabline.processByOrdinal("bdelete", " Close buffer:", opts)
+				P.tabline.process_by_ordinal("bdelete", " Close buffer:", opts)
 			end, { desc = "Close buffer by ordinal [Tabs]" })
 
 			vim.keymap.set("n", "<leader>tt", function()
-				P.tabline.processByOrdinal("b", " Go to buffer:", opts)
+				P.tabline.process_by_ordinal("b", " Go to buffer:", opts)
 			end, { desc = "Go to buffer by ordinal [Tabs]" })
 
-			P.tabline.setHlColors()
+			P.tabline.set_hl_colors()
 		end,
 	},
 	{
