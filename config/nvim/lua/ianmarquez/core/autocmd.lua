@@ -6,16 +6,16 @@ local group = vim.api.nvim_create_augroup("Custom Au Group", { clear = true })
 --   desc = "Save on InsertLeave"
 -- })
 
-vim.api.nvim_create_autocmd("UIEnter", {
-	callback = function()
-		if vim.fn.argc(-1) > 0 then
-			require("snacks").explorer({ hidden = true })
-		end
-	end,
-	group = group,
-	once = true,
-	desc = "Close Explorer on load",
-})
+-- vim.api.nvim_create_autocmd("UIEnter", {
+-- 	callback = function()
+-- 		if vim.fn.argc(-1) > 0 then
+-- 			require("snacks").explorer()
+-- 		end
+-- 	end,
+-- 	group = group,
+-- 	once = true,
+-- 	desc = "Close Explorer on load",
+-- })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight on yank",
