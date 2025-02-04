@@ -14,14 +14,23 @@ return {
 
 		local keymap = vim.keymap
 
+		vim.diagnostic.config({
+			virtual_text = true,
+			signs = true,
+			float = {
+				border = "rounded",
+				focusable = false,
+			},
+		})
+
 		local opts = { noremap = true, silent = true }
 		local on_attach = function(_, bufnr)
 			opts.buffer = bufnr
 
-			opts.desc = "View Code Actions"
+			opts.desc = "View [c]ode [a]ctions"
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 
-			opts.desc = "LSP Rename"
+			opts.desc = "LSP [r]e[n]ame"
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
 			opts.desc = "Go to previous diagnostic"
@@ -33,11 +42,14 @@ return {
 			opts.desc = "Show documentation for what is under cursor"
 			keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 
-			opts.desc = "Restart LSP"
+			opts.desc = "[r]e[s]tart LSP"
 			keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 
-			opts.desc = "Typescript Organize Imports"
+			opts.desc = "Typescript [o]rganize [i]mports"
 			keymap.set("n", "<leader>oi", ":OrganizeImports<CR>", opts) -- mapping to organize imports for typescript
+
+			opts.desc = "Show diagnostic floating window"
+			keymap.set("n", "<leader>dk", vim.diagnostic.open_float, opts) -- show diagnostic floating window
 		end
 
 		-- used to enable autocompletion (assign to every lsp server config)

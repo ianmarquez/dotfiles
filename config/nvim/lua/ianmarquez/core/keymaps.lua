@@ -2,9 +2,6 @@ vim.g.mapleader = " " -- <leader>
 
 local keymap = vim.keymap -- for conciseness
 
--- keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move text down" })
--- keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move text up" })
-
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "No highlight" })
 keymap.set("n", "x", '"_x"')
 keymap.set("n", "J", "mzJ`z", { desc = "Delete line break" })
@@ -28,10 +25,3 @@ keymap.set("n", "<M-h>", "<C-w>5<", { desc = "Adjust Split to Left (Window)" })
 keymap.set("n", "<M-l>", "<C-w>5>", { desc = "Adjust Split to Right (Window)" })
 keymap.set("n", "<M-j>", "<C-w>5+", { desc = "Adjust Split Down (Window)" })
 keymap.set("n", "<M-k>", "<C-w>5-", { desc = "Adjust Split to Up (Window)" })
-
--- vim.keymap.set("", "<leader>dl", function()
--- 	vim.diagnostic.config({
--- 		virtual_lines = not vim.diagnostic.config().virtual_lines,
--- 		virtual_text = not vim.diagnostic.config().virtual_text,
--- 	})
--- end, { desc = "Show [d]iagnostic [l]ines" })
