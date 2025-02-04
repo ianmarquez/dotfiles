@@ -36,7 +36,7 @@ P.config = {
 			{ "rafamadriz/friendly-snippets" },
 		},
 		lazy = true,
-		event = "VeryLazy",
+		event = "InsertEnter",
 		version = "*",
 		opts = {
 			sources = {
