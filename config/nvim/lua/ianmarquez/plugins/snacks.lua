@@ -47,7 +47,7 @@ return {
 							min_width = 40,
 							height = 0,
 							position = "right",
-							border = "none",
+							border = "left",
 							box = "vertical",
 							{
 								win = "input",
