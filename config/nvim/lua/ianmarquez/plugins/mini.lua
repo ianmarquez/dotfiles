@@ -150,11 +150,11 @@ P.config = {
 
 			vim.keymap.set("n", "<leader>tx", function()
 				P.tabline.process_by_ordinal("bdelete", " Close buffer:", opts)
-			end, { desc = "Close buffer by ordinal [Tabs]" })
+			end, { desc = "Close buffer by ordinal (Tabs)" })
 
 			vim.keymap.set("n", "<leader>tt", function()
 				P.tabline.process_by_ordinal("b", " Go to buffer:", opts)
-			end, { desc = "Go to buffer by ordinal [Tabs]" })
+			end, { desc = "Go to buffer by ordinal (Tabs)" })
 
 			P.tabline.set_hl_colors()
 		end,

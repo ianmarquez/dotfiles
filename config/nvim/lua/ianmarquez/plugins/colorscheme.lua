@@ -7,15 +7,15 @@ return {
 			require("catppuccin").setup({
 				transparent_background = true,
 				integrations = {
+					blink_cmp = true,
 					gitsigns = true,
 					mason = true,
 					native_lsp = { enabled = true },
 					nvimtree = true,
+					symbols_outline = true,
 					telescope = true,
 					treesitter = true,
 					treesitter_context = true,
-					symbols_outline = true,
-					bufferline = false,
 				},
 			})
 			-- load the colorscheme here

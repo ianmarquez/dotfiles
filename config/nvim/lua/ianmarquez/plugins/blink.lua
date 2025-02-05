@@ -50,11 +50,22 @@ P.config = {
 				-- }
 			},
 			completion = {
-				menu = { border = "single" },
+				menu = {
+					border = "single",
+					draw = {
+						treesitter = { "lsp" },
+					},
+				},
 				documentation = {
 					window = { border = "single" },
 					auto_show = true,
 					auto_show_delay_ms = 500,
+				},
+				accept = {
+					auto_brackets = { enabled = true },
+				},
+				ghost_text = {
+					enabled = vim.g.ai_cmp,
 				},
 			},
 			keymap = P.combine(P.default_binds, {
@@ -65,7 +76,7 @@ P.config = {
 				cmdline = P.default_binds,
 			}),
 			appearance = {
-				use_nvim_cmp_as_default = true,
+				use_nvim_cmp_as_default = false,
 				nerd_font_variant = "mono",
 			},
 		},
