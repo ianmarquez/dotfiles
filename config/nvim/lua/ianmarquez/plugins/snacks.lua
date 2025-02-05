@@ -5,8 +5,8 @@ return {
 		dashboard = {
 			sections = {
 				{ section = "header" },
-				{ section = "keys", gap = 1 },
-				{ icon = " ", title = "Projects", section = "projects", padding = { 2, 1 } },
+				{ section = "keys", gap = 1, padding = 1 },
+				{ icon = " ", title = "Projects", section = "projects", padding = 1, indent = 1 },
 				{ section = "startup" },
 			},
 		},
