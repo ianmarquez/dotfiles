@@ -1,6 +1,6 @@
-local P = {}
+local M = {}
 
-P.default_binds = {
+M.default_binds = {
 	preset = "default",
 	["<Up>"] = { "select_prev", "fallback" },
 	["<Down>"] = { "select_next", "fallback" },
@@ -9,7 +9,7 @@ P.default_binds = {
 	["<Tab>"] = { "accept", "fallback" },
 }
 
-P.combine = function(second_table, first_table)
+M.combine = function(second_table, first_table)
 	local merge = {}
 	for k, v in pairs(first_table) do
 		merge[k] = v
@@ -20,7 +20,7 @@ P.combine = function(second_table, first_table)
 	return merge
 end
 
-P.config = {
+M.config = {
 	{
 		"saghen/blink.compat",
 		version = "*",
@@ -68,12 +68,12 @@ P.config = {
 					enabled = vim.g.ai_cmp,
 				},
 			},
-			keymap = P.combine(P.default_binds, {
+			keymap = M.combine(M.default_binds, {
 				["<S-k>"] = { "scroll_documentation_up", "fallback" },
 				["<S-j>"] = { "scroll_documentation_down", "fallback" },
 				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 				["<C-e>"] = { "hide", "fallback" },
-				cmdline = P.default_binds,
+				cmdline = M.default_binds,
 			}),
 			appearance = {
 				use_nvim_cmp_as_default = false,
@@ -83,4 +83,4 @@ P.config = {
 	},
 }
 
-return P.config
+return M.config

@@ -1,6 +1,6 @@
-local P = {}
+local M = {}
 
-P.tabline = {
+M.tabline = {
 	instance = nil,
 	buffers = {},
 	buf_names = {},
@@ -9,41 +9,41 @@ P.tabline = {
 		local suffix = vim.bo[buf_id].modified and "" or ""
 		local readonly = vim.bo[buf_id].modifiable and "" or ""
 		local ordinal = showOrdinal and "[" .. buf_id .. "]" or ""
-		local title = readonly .. ordinal .. P.tabline.instance.default_format(buf_id, label) .. suffix
+		local title = readonly .. ordinal .. M.tabline.instance.default_format(buf_id, label) .. suffix
 		return title
 	end,
 
 	build_buffer_name_table = function()
-		P.tabline.buf_names = {}
-		P.tabline.buffers = {}
+		M.tabline.buf_names = {}
+		M.tabline.buffers = {}
 		for _, bufnr in pairs(vim.api.nvim_list_bufs()) do
 			local condition = vim.api.nvim_get_option_value("buflisted", { buf = bufnr })
 			if condition == true then
 				local bufName =
-					P.tabline.format(bufnr, vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":t"), true)
-				P.tabline.buffers[bufName] = bufnr
-				table.insert(P.tabline.buf_names, bufName)
+					M.tabline.format(bufnr, vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":t"), true)
+				M.tabline.buffers[bufName] = bufnr
+				table.insert(M.tabline.buf_names, bufName)
 			end
 		end
 	end,
 
 	process_by_ordinal = function(buffCmd, prompt, opts)
-		P.tabline.build_buffer_name_table()
+		M.tabline.build_buffer_name_table()
 
 		opts.format = function(buf_id, label)
-			return P.tabline.format(buf_id, label, true)
+			return M.tabline.format(buf_id, label, true)
 		end
 
-		P.tabline.instance.setup(opts)
+		M.tabline.instance.setup(opts)
 
-		vim.ui.select(P.tabline.buf_names, {
+		vim.ui.select(M.tabline.buf_names, {
 			prompt = prompt,
 			main = { current = true },
 		}, function(choice)
-			opts.format = P.tabline.format
-			P.tabline.instance.setup(opts)
+			opts.format = M.tabline.format
+			M.tabline.instance.setup(opts)
 			if choice ~= nil then
-				local cmd = buffCmd .. P.tabline.buffers[choice]
+				local cmd = buffCmd .. M.tabline.buffers[choice]
 				vim.cmd(cmd)
 			end
 		end)
@@ -63,7 +63,7 @@ P.tabline = {
 	end,
 }
 
-P.config = {
+M.config = {
 	{ "echasnovski/mini.move", version = "*", opts = {}, event = { "BufReadPre", "BufNewFile" } },
 	{ "echasnovski/mini.bufremove", version = "*", opts = {}, event = { "BufReadPre", "BufNewFile" } },
 	{ "echasnovski/mini.splitjoin", version = "*", opts = {}, event = { "BufReadPre", "BufNewFile" } },
@@ -143,20 +143,20 @@ P.config = {
 		},
 		config = function(_, opts)
 			local tabline = require("mini.tabline")
-			P.tabline.instance = tabline
+			M.tabline.instance = tabline
 
-			opts.format = P.tabline.format
-			P.tabline.instance.setup(opts)
+			opts.format = M.tabline.format
+			M.tabline.instance.setup(opts)
 
 			vim.keymap.set("n", "<leader>tx", function()
-				P.tabline.process_by_ordinal("bdelete", " Close buffer:", opts)
+				M.tabline.process_by_ordinal("bdelete", " Close buffer:", opts)
 			end, { desc = "Close buffer by ordinal (Tabs)" })
 
 			vim.keymap.set("n", "<leader>tt", function()
-				P.tabline.process_by_ordinal("b", " Go to buffer:", opts)
+				M.tabline.process_by_ordinal("b", " Go to buffer:", opts)
 			end, { desc = "Go to buffer by ordinal (Tabs)" })
 
-			P.tabline.set_hl_colors()
+			M.tabline.set_hl_colors()
 		end,
 	},
 	{
@@ -195,4 +195,4 @@ P.config = {
 	},
 }
 
-return P.config
+return M.config
