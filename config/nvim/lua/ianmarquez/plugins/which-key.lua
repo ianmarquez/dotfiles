@@ -38,7 +38,11 @@ return {
 			},
 			{
 				"<leader>t",
-				group = "Tab/Trouble Control/Terminal",
+				group = "Terminal",
+			},
+			{
+				"<leader>b",
+				group = "Buffers",
 			},
 			{
 				"<leader>tw",
