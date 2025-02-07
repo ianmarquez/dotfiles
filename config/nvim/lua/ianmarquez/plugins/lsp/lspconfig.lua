@@ -19,7 +19,8 @@ return {
 			signs = true,
 			float = {
 				border = "rounded",
-				focusable = false,
+				header = false,
+				focusable = true,
 			},
 		})
 

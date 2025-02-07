@@ -40,6 +40,10 @@ return {
 				"<leader>t",
 				group = "Tab/Trouble Control/Terminal",
 			},
+			{
+				"<leader>tw",
+				group = "Tailwind",
+			},
 		})
 	end,
 }
