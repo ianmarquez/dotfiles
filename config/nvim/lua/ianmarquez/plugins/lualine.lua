@@ -41,7 +41,7 @@ return {
 	opts = {
 		options = {
 			theme = "auto",
-			component_separators = { left = "", right = "" },
+			component_separators = { left = "", right = "" },
 			section_separators = { left = "", right = "" },
 			globalstatus = true,
 		},
@@ -49,11 +49,19 @@ return {
 			lualine_b = {
 				{
 					"buffers",
-					symbols = {
-						newFile = "",
-						modified = " ",
-						readonly = " ",
+					buffers_color = {
+						active = { bg = "#313244", fg = "#cdd6f4", gui = "bold" },
+						inactive = { bg = "#181825", fg = "#6c7086", gui = "italic" },
 					},
+					symbols = { newFile = "", modified = " ", readonly = " " },
+				},
+			},
+			lualine_x = {
+				{
+					"filename",
+					path = 1,
+					symbols = { newFile = "", modified = " ", readonly = " " },
+					shorting_target = 20,
 				},
 			},
 		},
@@ -82,9 +90,7 @@ return {
 			lualine_y = {
 				{ "fancy_filetype", ts_icon = "" },
 			},
-			lualine_z = {
-				{ "fancy_lsp_servers" },
-			},
+			lualine_z = { "fancy_lsp_servers" },
 		},
 	},
 	keys = {
