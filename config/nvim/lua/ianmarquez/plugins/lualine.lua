@@ -56,31 +56,34 @@ return {
 					},
 				},
 			},
-			lualine_z = {
+		},
+		sections = {
+			lualine_a = {
+				{ "fancy_mode", width = 3 },
+			},
+			lualine_b = {
+				{ "fancy_branch" },
+				{ "fancy_diff" },
+			},
+			lualine_c = {
+				{ "fancy_cwd", substitute_home = true },
+			},
+			lualine_x = {
 				{ "fancy_macro" },
+				{ "fancy_diagnostics" },
+				{ "fancy_searchcount" },
+				{ "fancy_location" },
 				{
 					require("lazy.status").updates,
 					cond = require("lazy.status").has_updates,
 					color = { fg = "#FFB86C" },
 				},
 			},
-		},
-		sections = {
-			lualine_b = {
-				{
-					"filename",
-					symbols = {
-						newFile = "",
-						modified = " ",
-						readonly = " ",
-					},
-				},
+			lualine_y = {
+				{ "fancy_filetype", ts_icon = "" },
 			},
-			lualine_c = {},
-			lualine_x = {
-				{ "encoding" },
-				{ "fileformat" },
-				{ "filetype" },
+			lualine_z = {
+				{ "fancy_lsp_servers" },
 			},
 		},
 	},
