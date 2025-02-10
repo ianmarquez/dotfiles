@@ -88,7 +88,7 @@ M.keys = {
 	{
 		"<leader>fq",
 		function()
-			require("snacks").picker.quickfix()
+			require("snacks").picker.qflist()
 		end,
 		desc = "[f]ind in [q]uickfix list (Picker)",
 	},
@@ -179,6 +179,15 @@ M.keys = {
 }
 
 M.picker = {
+	icons = {
+		ui = {
+			live = "",
+			-- hidden = "󰘓",
+			-- ignored = "",
+			selected = "󰱒 ",
+			unselected = "󰄱 ",
+		},
+	},
 	sources = {
 		select = {
 			focus = "list",
