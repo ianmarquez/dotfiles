@@ -14,39 +14,43 @@ return {
 		wk.add({
 			{
 				"<leader>f",
-				group = "Pickers",
+				group = "  Find",
 			},
 			{
 				"<C-w>",
-				group = "Window Control",
+				group = "  Window Control",
 			},
 			{
 				"<leader>w",
-				group = "Window Control",
+				group = "  Window Control",
 			},
 			{
 				"<leader>n",
-				group = "Notification",
+				group = "  Notification",
 			},
 			{
 				"<leader>d",
-				group = "DiffView/Diagnostics/Dropbar",
+				group = "  Diagnostics |  Dropbar",
 			},
 			{
 				"<leader>m",
-				group = "Format",
+				group = "  Format",
 			},
 			{
 				"<leader>t",
-				group = "Terminal",
+				group = "  Terminal",
 			},
 			{
 				"<leader>b",
-				group = "Buffers",
+				group = "  Buffers",
 			},
 			{
 				"<leader>tw",
-				group = "Tailwind",
+				group = " 󱏿 Tailwind",
+			},
+			{
+				"<leader>g",
+				group = "  Git",
 			},
 		})
 	end,

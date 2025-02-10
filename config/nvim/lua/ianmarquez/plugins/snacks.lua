@@ -142,6 +142,20 @@ M.keys = {
 		desc = "[f]ind [h]elp documents (Picker)",
 	},
 	{
+		"<leader>fi",
+		function()
+			require("snacks").picker.icons()
+		end,
+		desc = "[f]ind [i]cons (Picker)",
+	},
+	{
+		"<leader>fg",
+		function()
+			require("snacks").picker.git_diff()
+		end,
+		desc = "[f]ind [g]it diff (Picker)",
+	},
+	{
 		"gf",
 		function()
 			require("snacks").picker.lsp_references()
