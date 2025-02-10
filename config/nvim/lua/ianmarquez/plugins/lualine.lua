@@ -56,14 +56,6 @@ return {
 					symbols = { newFile = "", modified = " ", readonly = " " },
 				},
 			},
-			lualine_x = {
-				{
-					"filename",
-					path = 1,
-					symbols = { newFile = "", modified = " ", readonly = " " },
-					shorting_target = 20,
-				},
-			},
 		},
 		sections = {
 			lualine_a = {

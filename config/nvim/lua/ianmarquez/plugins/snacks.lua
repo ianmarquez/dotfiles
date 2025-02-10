@@ -86,32 +86,39 @@ M.keys = {
 	},
 
 	{
+		"<leader>fq",
+		function()
+			require("snacks").picker.quickfix()
+		end,
+		desc = "[f]ind in [q]uickfix list (Picker)",
+	},
+	{
 		"<leader>fs",
 		function()
 			require("snacks").picker.grep({ hidden = true })
 		end,
-		desc = "[F]ind [S]tring (Picker)",
+		desc = "[f]ind [s]tring (Picker)",
 	},
 	{
 		"<leader>fc",
 		function()
 			require("snacks").picker.grep_buffers()
 		end,
-		desc = "[F]ind in [C]urrent Buffer (Picker)",
+		desc = "[f]ind in [c]urrent Buffer (Picker)",
 	},
 	{
 		"<leader>fb",
 		function()
 			require("snacks").picker.buffers()
 		end,
-		desc = "[F]ind [B]uffers (Picker)",
+		desc = "[f]ind [b]uffers (Picker)",
 	},
 	{
 		"<leader>ff",
 		function()
 			require("snacks").picker.files({ hidden = true })
 		end,
-		desc = "[F]ind [F]iles (Picker)",
+		desc = "[f]ind [f]iles (Picker)",
 	},
 	{
 		"<leader>o",
@@ -125,49 +132,49 @@ M.keys = {
 		function()
 			require("snacks").picker.keymaps()
 		end,
-		desc = "[F]ind [K]eymaps (Picker)",
+		desc = "[f]ind [k]eymaps (Picker)",
 	},
 	{
 		"<leader>fh",
 		function()
 			require("snacks").picker.help()
 		end,
-		desc = "[F]ind [H]elp documents (Picker)",
+		desc = "[f]ind [h]elp documents (Picker)",
 	},
 	{
 		"gf",
 		function()
 			require("snacks").picker.lsp_references()
 		end,
-		desc = "[G]o LSP re[f]erences (Picker)",
+		desc = "[g]o LSP re[f]erences (Picker)",
 	},
 	{
 		"gD",
 		function()
 			require("snacks").picker.lsp_type_definitions()
 		end,
-		desc = "[G]o Type [D]efinitions (Picker)",
+		desc = "[g]o to type [D]efinitions (Picker)",
 	},
 	{
 		"gd",
 		function()
 			require("snacks").picker.lsp_definitions()
 		end,
-		desc = "[G]o [d]efinitions (Picker)",
+		desc = "[g]o [d]efinitions (Picker)",
 	},
 	{
 		"<leader>fu",
 		function()
 			require("snacks").picker.undo()
 		end,
-		desc = "[F]ind [U]ndo",
+		desc = "[f]ind [u]ndo",
 	},
 	{
 		"<leader>e",
 		function()
 			require("snacks").explorer({ hidden = true })
 		end,
-		desc = "Toggle [e]xplorer (Explorer)",
+		desc = "toggle [e]xplorer (Explorer)",
 	},
 }
 
