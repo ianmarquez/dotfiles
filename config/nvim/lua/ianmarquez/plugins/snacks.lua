@@ -167,7 +167,7 @@ M.keys = {
 		function()
 			require("snacks").picker.git_branches({ layout = "vertical" })
 		end,
-		desc = "[g]it [b]ranches (Git)",
+		desc = "[g]it b[r]anches (Git)",
 	},
 	{
 		"gf",
