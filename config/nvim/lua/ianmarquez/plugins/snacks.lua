@@ -204,7 +204,7 @@ M.picker = {
 	},
 	sources = {
 		select = {
-			focus = "list",
+			focus = "input",
 			layout = {
 				preview = false,
 				layout = {

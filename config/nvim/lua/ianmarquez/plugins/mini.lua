@@ -1,11 +1,29 @@
 local M = {}
 
 M.config = {
-	{ "echasnovski/mini.move", version = "*", opts = {}, event = { "BufReadPre", "BufNewFile" } },
 	{ "echasnovski/mini.bufremove", version = "*", opts = {}, event = { "BufReadPre", "BufNewFile" } },
 	{ "echasnovski/mini.splitjoin", version = "*", opts = {}, event = { "BufReadPre", "BufNewFile" } },
 	{ "echasnovski/mini.pairs", version = "*", opts = {}, event = { "BufReadPre", "BufNewFile" } },
 	{ "echasnovski/mini.icons", version = "*", opts = { style = "glyph" }, lazy = true },
+	{
+		"echasnovski/mini.move",
+		version = "*",
+		opts = {
+			mappings = { -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
+				left = "",
+				right = "",
+				down = "<S-j>",
+				up = "<S-k>",
+
+				-- Move current line in Normal mode
+				line_left = "",
+				line_right = "",
+				line_down = "<S-j>",
+				line_up = "<S-k>",
+			},
+		},
+		event = { "BufReadPre", "BufNewFile" },
+	},
 	{
 		"echasnovski/mini.comment",
 		version = "*",
@@ -52,12 +70,12 @@ M.config = {
 			local plugin = require("lazy.core.config").spec.plugins["mini.surround"]
 			local opts = require("lazy.core.plugin").values(plugin, "opts", false)
 			local mappings = {
-				{ opts.mappings.add, desc = "Add [S]urrounding (Surround)", mode = { "n", "v" } },
-				{ opts.mappings.delete, desc = "[D]elete [S]urrounding (Surround)" },
-				{ opts.mappings.find, desc = "[F]ind Right [S]urrounding (Surround)" },
-				{ opts.mappings.find_left, desc = "Find Left [S]urrounding (Surround)" },
+				{ opts.mappings.add, desc = "Add [s]urrounding (Surround)", mode = { "n", "v" } },
+				{ opts.mappings.delete, desc = "[d]elete [s]urrounding (Surround)" },
+				{ opts.mappings.find, desc = "[f]ind Right [s]urrounding (Surround)" },
+				{ opts.mappings.find_left, desc = "Find Left [s]urrounding (Surround)" },
 				{ opts.mappings.highlight, desc = "Highlight Surrounding (Surround)" },
-				{ opts.mappings.replace, desc = "[C]hange [S]urrounding (Surround)" },
+				{ opts.mappings.replace, desc = "[c]hange [s]urrounding (Surround)" },
 				{ opts.mappings.update_n_lines, desc = "Update `MiniSurround.config.n_lines` (Surround)" },
 			}
 			mappings = vim.tbl_filter(function(m)
