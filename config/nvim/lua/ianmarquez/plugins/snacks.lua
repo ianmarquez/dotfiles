@@ -36,18 +36,11 @@ M.keys = {
 		desc = "LazyDocker (Terminal)",
 	},
 	{
-		"<leader>gb",
-		function()
-			require("snacks").git.blame_line()
-		end,
-		desc = "Git Blame Line",
-	},
-	{
-		"<leader>gB",
+		"<leader>go",
 		function()
 			require("snacks").gitbrowse()
 		end,
-		desc = "Git Browse",
+		desc = "[g]it [o]pen in browser (Git)",
 	},
 	{
 		"<leader>tg",
@@ -57,38 +50,40 @@ M.keys = {
 		desc = "Lazygit (Terminal)",
 	},
 	{
-		"<leader>gf",
-		function()
-			require("snacks").lazygit.log_file()
-		end,
-		desc = "Lazygit Current File History (Terminal)",
-	},
-	{
-		"<leader>gl",
-		function()
-			require("snacks").lazygit.log()
-		end,
-		desc = "Lazygit Log (cwd) (Terminal)",
-	},
-	{
 		"<leader>nd",
 		function()
 			require("snacks").notifier.hide()
 		end,
-		desc = "[N]otifications [D]ismiss (Notifications)",
+		desc = "[n]otifications [d]ismiss (Notifications)",
 	},
 	{
 		"<leader>nn",
 		function()
 			require("snacks").notifier.show_history()
 		end,
-		desc = "[N]otificatio[n]s show (Notifications)",
+		desc = "[n]otificatio[n]s show (Notifications)",
+	},
+	{
+		"<leader>gf",
+		function()
+			require("snacks").picker.git_log_file({ layout = "vertical" })
+		end,
+		desc = "[g]it current [f]ile History (Git)",
+	},
+	{
+		"<leader>gl",
+		function()
+			require("snacks").picker.git_log({ layout = "vertical" })
+		end,
+		desc = "[g]it [l]og current working directory (Git)",
 	},
 
 	{
 		"<leader>fq",
 		function()
-			require("snacks").picker.qflist()
+			require("snacks").picker.qflist({
+				layout = "vertical",
+			})
 		end,
 		desc = "[f]ind in [q]uickfix list (Picker)",
 	},
@@ -109,7 +104,9 @@ M.keys = {
 	{
 		"<leader>fb",
 		function()
-			require("snacks").picker.buffers()
+			require("snacks").picker.buffers({
+				layout = "select",
+			})
 		end,
 		desc = "[f]ind [b]uffers (Picker)",
 	},
@@ -123,21 +120,21 @@ M.keys = {
 	{
 		"<leader>o",
 		function()
-			require("snacks").picker.lsp_symbols()
+			require("snacks").picker.lsp_symbols({ layout = "vertical" })
 		end,
 		desc = "Sh[o]w Symbols in Current File (Picker)",
 	},
 	{
 		"<leader>fk",
 		function()
-			require("snacks").picker.keymaps()
+			require("snacks").picker.keymaps({ layout = "vertical" })
 		end,
 		desc = "[f]ind [k]eymaps (Picker)",
 	},
 	{
 		"<leader>fh",
 		function()
-			require("snacks").picker.help()
+			require("snacks").picker.help({ layout = "vertical" })
 		end,
 		desc = "[f]ind [h]elp documents (Picker)",
 	},
@@ -151,35 +148,42 @@ M.keys = {
 	{
 		"<leader>fg",
 		function()
-			require("snacks").picker.git_diff()
+			require("snacks").picker.git_diff({ layout = "vertical" })
 		end,
 		desc = "[f]ind [g]it diff (Picker)",
 	},
 	{
+		"<leader>gr",
+		function()
+			require("snacks").picker.git_branches({ layout = "vertical" })
+		end,
+		desc = "[g]it [b]ranches (Git)",
+	},
+	{
 		"gf",
 		function()
-			require("snacks").picker.lsp_references()
+			require("snacks").picker.lsp_references({ layout = "vertical" })
 		end,
 		desc = "[g]o LSP re[f]erences (Picker)",
 	},
 	{
 		"gD",
 		function()
-			require("snacks").picker.lsp_type_definitions()
+			require("snacks").picker.lsp_type_definitions({ layout = "vertical" })
 		end,
 		desc = "[g]o to type [D]efinitions (Picker)",
 	},
 	{
 		"gd",
 		function()
-			require("snacks").picker.lsp_definitions()
+			require("snacks").picker.lsp_definitions({ layout = "vertical" })
 		end,
 		desc = "[g]o [d]efinitions (Picker)",
 	},
 	{
 		"<leader>fu",
 		function()
-			require("snacks").picker.undo()
+			require("snacks").picker.undo({ layout = "vertical" })
 		end,
 		desc = "[f]ind [u]ndo",
 	},
@@ -201,6 +205,9 @@ M.picker = {
 			selected = "󰱒 ",
 			unselected = "󰄱 ",
 		},
+	},
+	matcher = {
+		frecency = true,
 	},
 	sources = {
 		select = {
