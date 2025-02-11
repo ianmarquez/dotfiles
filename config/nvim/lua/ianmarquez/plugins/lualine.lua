@@ -67,10 +67,11 @@ return {
 			lualine_b = {
 				{
 					"buffers",
-					buffers_color = {
-						active = { bg = "#313244", fg = "#cdd6f4", gui = "bold" },
-						inactive = { bg = "#181825", fg = "#6c7086", gui = "italic" },
-					},
+					-- buffers_color = {
+					-- 	active = { bg = "#313244", fg = "#cdd6f4", gui = "bold" },
+					-- 	inactive = { bg = "#181825", fg = "#6c7086", gui = "italic" },
+					-- },
+					use_mode_colors = true,
 					symbols = { newFile = "", modified = " ", readonly = " " },
 				},
 			},
