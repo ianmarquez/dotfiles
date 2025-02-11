@@ -34,7 +34,7 @@ opt.signcolumn = "yes"
 opt.scrolloff = 10
 
 -- mouse
--- opt.mouse = ""
+opt.mouse = ""
 
 -- backspace
 opt.backspace = "indent,eol,start"
