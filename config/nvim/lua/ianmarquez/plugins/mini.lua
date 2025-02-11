@@ -18,8 +18,8 @@ M.config = {
 				-- Move current line in Normal mode
 				line_left = "",
 				line_right = "",
-				line_down = "<S-j>",
-				line_up = "<S-k>",
+				line_down = "",
+				line_up = "",
 			},
 		},
 		event = { "BufReadPre", "BufNewFile" },

@@ -133,21 +133,21 @@ return {
 			desc = "Close all buffers except current (Tabs)",
 			mode = "n",
 		},
-		{
-			"<leader>bx",
-			function()
-				M:process_by_ordinal("bdelete", " Close buffer:")
-			end,
-			desc = "Close buffer (Tabs)",
-			mode = "n",
-		},
-		{
-			"<leader>bb",
-			function()
-				M:process_by_ordinal("b", " Go to buffer:")
-			end,
-			desc = "Go to buffer (Tabs)",
-			mode = "n",
-		},
+		-- {
+		-- 	"<leader>bx",
+		-- 	function()
+		-- 		M:process_by_ordinal("bdelete", " Close buffer:")
+		-- 	end,
+		-- 	desc = "Close buffer (Tabs)",
+		-- 	mode = "n",
+		-- },
+		-- {
+		-- 	"<leader>bb",
+		-- 	function()
+		-- 		M:process_by_ordinal("b", " Go to buffer:")
+		-- 	end,
+		-- 	desc = "Go to buffer (Tabs)",
+		-- 	mode = "n",
+		-- },
 	},
 }

@@ -102,13 +102,23 @@ M.keys = {
 		desc = "[f]ind in [c]urrent Buffer (Picker)",
 	},
 	{
-		"<leader>fb",
+		"<leader>bb",
 		function()
 			require("snacks").picker.buffers({
 				layout = "select",
+				finder = "buffers",
+				format = "buffer",
+				hidden = false,
+				current = true,
+				sort_lastused = true,
+				focus = "list",
+				win = {
+					input = { keys = { ["dd"] = "bufdelete" } },
+					list = { keys = { ["dd"] = "bufdelete" } },
+				},
 			})
 		end,
-		desc = "[f]ind [b]uffers (Picker)",
+		desc = "find [b][b]uffers (Picker)",
 	},
 	{
 		"<leader>ff",
@@ -208,6 +218,17 @@ M.picker = {
 	},
 	matcher = {
 		frecency = true,
+	},
+	win = {
+		input = {
+			keys = {
+				["<Esc>"] = { "close", mode = { "n", "i" } },
+				["J"] = { "preview_scroll_down", mode = { "n", "i" } },
+				["K"] = { "preview_scroll_up", mode = { "n", "i" } },
+				["H"] = { "preview_scroll_left", mode = { "n", "i" } },
+				["L"] = { "preview_scroll_right", mode = { "n", "i" } },
+			},
+		},
 	},
 	sources = {
 		select = {
