@@ -3,6 +3,24 @@ local M = {
 	buf_names = {},
 }
 
+function M:close_others()
+	local current_buf = vim.api.nvim_get_current_buf()
+	local buf_to_be_closed = {}
+
+	for _, bufnr in pairs(vim.api.nvim_list_bufs()) do
+		if bufnr ~= current_buf then
+			if vim.api.nvim_get_option_value("modified", { buf = bufnr }) == false then
+				table.insert(buf_to_be_closed, bufnr)
+			end
+		end
+	end
+
+	vim.cmd({
+		cmd = "bdelete",
+		args = buf_to_be_closed,
+	})
+end
+
 function M:build_buffer_name_table()
 	self.buf_names = {}
 	self.buffers = {}
@@ -105,7 +123,7 @@ return {
 		{
 			"<leader>bc",
 			function()
-				vim.cmd([[%bd|e#|bd#]])
+				M:close_others()
 			end,
 			desc = "Close all buffers except current (Tabs)",
 			mode = "n",
@@ -115,7 +133,7 @@ return {
 			function()
 				M:process_by_ordinal("bdelete", " Close buffer:")
 			end,
-			desc = "Close all buffers except current (Tabs)",
+			desc = "Close buffer (Tabs)",
 			mode = "n",
 		},
 		{
