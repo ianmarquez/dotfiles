@@ -6,19 +6,23 @@ local M = {
 function M:close_others()
 	local current_buf = vim.api.nvim_get_current_buf()
 	local buf_to_be_closed = {}
+	local count = 0
 
 	for _, bufnr in pairs(vim.api.nvim_list_bufs()) do
 		if bufnr ~= current_buf then
 			if vim.api.nvim_get_option_value("modified", { buf = bufnr }) == false then
+				count = count + 1
 				table.insert(buf_to_be_closed, bufnr)
 			end
 		end
 	end
 
-	vim.cmd({
-		cmd = "bdelete",
-		args = buf_to_be_closed,
-	})
+	if count > 0 then
+		vim.cmd({
+			cmd = "bdelete",
+			args = buf_to_be_closed,
+		})
+	end
 end
 
 function M:build_buffer_name_table()
