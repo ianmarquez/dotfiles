@@ -9,7 +9,7 @@ local group = vim.api.nvim_create_augroup("Custom Au Group", { clear = true })
 vim.api.nvim_create_autocmd("UIEnter", {
 	callback = function()
 		if vim.fn.argc(-1) > 0 then
-			require("snacks").explorer()
+			require("snacks").explorer.open()
 		end
 	end,
 	group = group,
