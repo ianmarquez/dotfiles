@@ -1,7 +1,4 @@
-local M = {
-	buffers = {},
-	buf_names = {},
-}
+local M = {}
 
 function M:close_others()
 	local current_buf = vim.api.nvim_get_current_buf()
@@ -10,7 +7,9 @@ function M:close_others()
 
 	for _, bufnr in pairs(vim.api.nvim_list_bufs()) do
 		if bufnr ~= current_buf then
-			if vim.api.nvim_get_option_value("modified", { buf = bufnr }) == false then
+			local is_modified = vim.api.nvim_get_option_value("modified", { buf = bufnr })
+			local is_listed = vim.api.nvim_get_option_value("buflisted", { buf = bufnr })
+			if is_modified == false and is_listed == true then
 				count = count + 1
 				table.insert(buf_to_be_closed, bufnr)
 			end
@@ -23,33 +22,6 @@ function M:close_others()
 			args = buf_to_be_closed,
 		})
 	end
-end
-
-function M:build_buffer_name_table()
-	self.buf_names = {}
-	self.buffers = {}
-	for _, bufnr in pairs(vim.api.nvim_list_bufs()) do
-		local condition = vim.api.nvim_get_option_value("buflisted", { buf = bufnr })
-		if condition == true then
-			local bufName = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":t")
-			self.buffers[bufName] = bufnr
-			table.insert(self.buf_names, bufName)
-		end
-	end
-end
-
-function M:process_by_ordinal(buffCmd, prompt)
-	self.build_buffer_name_table(self)
-
-	vim.ui.select(self.buf_names, {
-		prompt = prompt,
-		main = { current = true },
-	}, function(choice)
-		if choice ~= nil then
-			local cmd = buffCmd .. self.buffers[choice]
-			vim.cmd(cmd)
-		end
-	end)
 end
 
 return {
