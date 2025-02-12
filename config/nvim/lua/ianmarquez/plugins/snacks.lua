@@ -64,21 +64,6 @@ M.keys = {
 		desc = "[n]otificatio[n]s show (Notifications)",
 	},
 	{
-		"<leader>gf",
-		function()
-			require("snacks").picker.git_log_file({ layout = "vertical" })
-		end,
-		desc = "[g]it current [f]ile History (Git)",
-	},
-	{
-		"<leader>gl",
-		function()
-			require("snacks").picker.git_log({ layout = "vertical" })
-		end,
-		desc = "[g]it [l]og current working directory (Git)",
-	},
-
-	{
 		"<leader>fq",
 		function()
 			require("snacks").picker.qflist({
@@ -163,11 +148,51 @@ M.keys = {
 		desc = "[f]ind [g]it diff (Picker)",
 	},
 	{
-		"<leader>gr",
+		"<leader>gf",
 		function()
-			require("snacks").picker.git_branches({ layout = "vertical" })
+			require("snacks").picker.git_log_file({ layout = "vertical" })
 		end,
-		desc = "[g]it b[r]anches (Git)",
+		desc = "[g]it current [f]ile History (Git)",
+	},
+	{
+		"<leader>gl",
+		function()
+			require("snacks").picker.git_log({ layout = "vertical" })
+		end,
+		desc = "[g]it [l]og current working directory (Git)",
+	},
+	{
+		"<leader>gs",
+		function()
+			require("snacks").picker.git_status({
+				layout = "vertical",
+				win = {
+					input = {
+						keys = {
+							["aa"] = { "git_stage", mode = { "n", "i" } },
+						},
+					},
+				},
+			})
+		end,
+		desc = "[g]it [s]tatus (Git)",
+	},
+	{
+		"<leader>gg",
+		function()
+			require("snacks").picker.git_branches({
+				layout = "vscode",
+				win = {
+					input = {
+						keys = {
+							["aa"] = { "git_branch_add", mode = { "n", "i" } },
+							["dd"] = { "git_branch_del", mode = { "n", "i" } },
+						},
+					},
+				},
+			})
+		end,
+		desc = "[g]it branches (Git)",
 	},
 	{
 		"gf",
