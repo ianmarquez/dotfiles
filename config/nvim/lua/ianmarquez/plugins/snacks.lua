@@ -29,7 +29,7 @@ M.layouts = {
 			{
 				win = "input",
 				height = 1,
-				border = "bottom",
+				border = "rounded",
 				title = " File Explorer {flags}",
 				title_pos = "left",
 			},
@@ -144,7 +144,7 @@ M.keys = {
 	{
 		"<leader>fs",
 		function()
-			require("snacks").picker.grep({ hidden = true })
+			require("snacks").picker.grep()
 		end,
 		desc = "[f]ind [s]tring (Picker)",
 	},
@@ -158,19 +158,7 @@ M.keys = {
 	{
 		"<leader>bb",
 		function()
-			require("snacks").picker.buffers({
-				layout = M.layouts.select_small,
-				finder = "buffers",
-				format = "buffer",
-				hidden = false,
-				current = true,
-				sort_lastused = true,
-				focus = "list",
-				win = {
-					input = { keys = { ["dd"] = "bufdelete" } },
-					list = { keys = { ["dd"] = "bufdelete" } },
-				},
-			})
+			require("snacks").picker.buffers()
 		end,
 		desc = "find [b][b]uffers (Picker)",
 	},
@@ -233,33 +221,14 @@ M.keys = {
 	{
 		"<leader>gs",
 		function()
-			require("snacks").picker.git_status({
-				layout = "vertical",
-				win = {
-					input = {
-						keys = {
-							["aa"] = { "git_stage", mode = { "n", "i" } },
-						},
-					},
-				},
-			})
+			require("snacks").picker.git_status()
 		end,
 		desc = "[g]it [s]tatus (Git)",
 	},
 	{
 		"<leader>gg",
 		function()
-			require("snacks").picker.git_branches({
-				layout = M.layouts.vertical_reverse,
-				win = {
-					input = {
-						keys = {
-							["aa"] = { "git_branch_add", mode = { "n", "i" } },
-							["dd"] = { "git_branch_del", mode = { "n", "i" } },
-						},
-					},
-				},
-			})
+			require("snacks").picker.git_branches()
 		end,
 		desc = "[g]it branches (Git)",
 	},
@@ -323,17 +292,47 @@ M.picker = {
 		},
 	},
 	sources = {
+		buffers = {
+			layout = M.layouts.select_small,
+			finder = "buffers",
+			format = "buffer",
+			hidden = false,
+			current = true,
+			sort_lastused = true,
+			focus = "list",
+			win = {
+				input = { keys = { ["dd"] = "bufdelete" } },
+				list = { keys = { ["dd"] = "bufdelete" } },
+			},
+		},
+		git_branches = {
+			layout = M.layouts.vertical_reverse,
+			win = {
+				input = {
+					keys = {
+						["aa"] = { "git_branch_add", mode = { "n", "i" } },
+						["dd"] = { "git_branch_del", mode = { "n", "i" } },
+					},
+				},
+			},
+		},
+		git_status = {
+			layout = M.layouts.vertical_reverse,
+			win = {
+				input = {
+					keys = {
+						["aa"] = { "git_stage", mode = { "n", "i" } },
+					},
+				},
+			},
+		},
+		grep = { hidden = true },
+		explorer = { jump = { close = true }, layout = M.layouts.explorer },
+		files = { hidden = true },
 		select = {
 			focus = "input",
 			layout = { preview = false, layout = M.layouts.input },
 		},
-		files = {
-			hidden = true,
-			layout = M.layouts.vertical_reverse,
-		},
-		grep_buffers = { layout = M.layouts.vertical_reverse },
-		grep = { layout = M.layouts.vertical_reverse },
-		explorer = { jump = { close = true }, layout = M.layouts.explorer },
 	},
 }
 
