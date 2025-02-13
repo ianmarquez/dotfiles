@@ -1,72 +1,70 @@
 local M = {}
 
-M.common = {
-	layouts = {
-		input = {
-			layout = {
-				backdrop = true,
-				width = 0.3,
-				min_width = 50,
-				height = 0.4,
-				min_height = 2,
-				box = "vertical",
-				border = "rounded",
-				title = "{title}",
+M.layouts = {
+	input = {
+		layout = {
+			backdrop = true,
+			width = 0.3,
+			min_width = 50,
+			height = 0.4,
+			min_height = 2,
+			box = "vertical",
+			border = "rounded",
+			title = "{title}",
+			title_pos = "left",
+			{ win = "input", height = 1, border = "bottom" },
+			{ win = "list", border = "none" },
+			{ win = "preview", title = "{preview}", height = 0.4, border = "top" },
+		},
+	},
+	explorer = {
+		layout = {
+			backdrop = false,
+			width = 40,
+			min_width = 40,
+			height = 0,
+			position = "right",
+			border = "left",
+			box = "vertical",
+			{
+				win = "input",
+				height = 1,
+				border = "bottom",
+				title = " File Explorer {flags}",
 				title_pos = "left",
-				{ win = "input", height = 1, border = "bottom" },
-				{ win = "list", border = "none" },
-				{ win = "preview", title = "{preview}", height = 0.4, border = "top" },
 			},
+			{ win = "list", border = "none", title = " File Explorer {flags}", title_pos = "left" },
 		},
-		explorer = {
-			layout = {
-				backdrop = false,
-				width = 40,
-				min_width = 40,
-				height = 0,
-				position = "right",
-				border = "left",
-				box = "vertical",
-				{
-					win = "input",
-					height = 1,
-					border = "rounded",
-					title = " File Explorer {flags}",
-					title_pos = "left",
-				},
-				{ win = "list", border = "none", title = " File Explorer {flags}", title_pos = "left" },
-			},
+	},
+	vertical_reverse = {
+		layout = {
+			backdrop = true,
+			width = 0.5,
+			min_width = 80,
+			height = 0.8,
+			min_height = 30,
+			box = "vertical",
+			border = "rounded",
+			title_pos = "center",
+			title = "{title} {live} {flags}",
+			{ win = "input", height = 1, border = "bottom" },
+			{ win = "preview", title = "{preview}", border = "bottom" },
+			{ win = "list", border = "none", height = 0.3 },
 		},
-		vertical_reverse = {
-			layout = {
-				backdrop = true,
-				width = 0.5,
-				min_width = 80,
-				height = 0.8,
-				min_height = 30,
-				box = "vertical",
-				border = "rounded",
-				title_pos = "center",
-				title = "{title} {live} {flags}",
-				{ win = "input", height = 1, border = "bottom" },
-				{ win = "preview", title = "{preview}", border = "bottom" },
-				{ win = "list", border = "none", height = 0.3 },
-			},
-		},
-		select_small = {
-			layout = {
-				backdrop = true,
-				width = 0.4,
-				min_width = 40,
-				height = 0.4,
-				min_height = 3,
-				box = "vertical",
-				border = "rounded",
-				title = "{title}",
-				title_pos = "left",
-				{ win = "input", height = 1, border = "bottom" },
-				{ win = "list", border = "none" },
-			},
+	},
+	select_small = {
+		layout = {
+			backdrop = true,
+			width = 0.4,
+			min_width = 40,
+			height = 0.4,
+			min_height = 3,
+			box = "vertical",
+			border = "rounded",
+			title = "{title}",
+			title_pos = "left",
+			{ win = "input", height = 1, border = "bottom" },
+			{ win = "list", border = "none" },
 		},
 	},
 }
@@ -138,7 +136,7 @@ M.keys = {
 		"<leader>fq",
 		function()
 			require("snacks").picker.qflist({
-				layout = M.common.layouts.vertical_reverse,
+				layout = M.layouts.vertical_reverse,
 			})
 		end,
 		desc = "[f]ind in [q]uickfix list (Picker)",
@@ -161,7 +159,7 @@ M.keys = {
 		"<leader>bb",
 		function()
 			require("snacks").picker.buffers({
-				layout = M.common.layouts.select_small,
+				layout = M.layouts.select_small,
 				finder = "buffers",
 				format = "buffer",
 				hidden = false,
@@ -179,30 +177,28 @@ M.keys = {
 	{
 		"<leader>ff",
 		function()
-			require("snacks").picker.files({
-				hidden = true,
-			})
+			require("snacks").picker.files()
 		end,
 		desc = "[f]ind [f]iles (Picker)",
 	},
 	{
 		"<leader>o",
 		function()
-			require("snacks").picker.lsp_symbols({ layout = M.common.layouts.vertical_reverse })
+			require("snacks").picker.lsp_symbols({ layout = M.layouts.vertical_reverse })
 		end,
 		desc = "Sh[o]w Symbols in Current File (Picker)",
 	},
 	{
 		"<leader>fk",
 		function()
-			require("snacks").picker.keymaps({ layout = M.common.layouts.vertical_reverse })
+			require("snacks").picker.keymaps({ layout = M.layouts.vertical_reverse })
 		end,
 		desc = "[f]ind [k]eymaps (Picker)",
 	},
 	{
 		"<leader>fh",
 		function()
-			require("snacks").picker.help({ layout = M.common.layouts.vertical_reverse })
+			require("snacks").picker.help({ layout = M.layouts.vertical_reverse })
 		end,
 		desc = "[f]ind [h]elp documents (Picker)",
 	},
@@ -216,21 +212,21 @@ M.keys = {
 	{
 		"<leader>fg",
 		function()
-			require("snacks").picker.git_diff({ layout = M.common.layouts.vertical_reverse })
+			require("snacks").picker.git_diff({ layout = M.layouts.vertical_reverse })
 		end,
 		desc = "[f]ind [g]it diff (Picker)",
 	},
 	{
 		"<leader>gf",
 		function()
-			require("snacks").picker.git_log_file({ layout = M.common.layouts.vertical_reverse })
+			require("snacks").picker.git_log_file({ layout = M.layouts.vertical_reverse })
 		end,
 		desc = "[g]it current [f]ile History (Git)",
 	},
 	{
 		"<leader>gl",
 		function()
-			require("snacks").picker.git_log({ layout = M.common.layouts.vertical_reverse })
+			require("snacks").picker.git_log({ layout = M.layouts.vertical_reverse })
 		end,
 		desc = "[g]it [l]og current working directory (Git)",
 	},
@@ -254,7 +250,7 @@ M.keys = {
 		"<leader>gg",
 		function()
 			require("snacks").picker.git_branches({
-				layout = M.common.layouts.vertical_reverse,
+				layout = M.layouts.vertical_reverse,
 				win = {
 					input = {
 						keys = {
@@ -270,28 +266,28 @@ M.keys = {
 	{
 		"gf",
 		function()
-			require("snacks").picker.lsp_references({ layout = M.common.layouts.vertical_reverse })
+			require("snacks").picker.lsp_references({ layout = M.layouts.vertical_reverse })
 		end,
 		desc = "[g]o LSP re[f]erences (Picker)",
 	},
 	{
 		"gD",
 		function()
-			require("snacks").picker.lsp_type_definitions({ layout = M.common.layouts.vertical_reverse })
+			require("snacks").picker.lsp_type_definitions({ layout = M.layouts.vertical_reverse })
 		end,
 		desc = "[g]o to type [D]efinitions (Picker)",
 	},
 	{
 		"gd",
 		function()
-			require("snacks").picker.lsp_definitions({ layout = M.common.layouts.vertical_reverse })
+			require("snacks").picker.lsp_definitions({ layout = M.layouts.vertical_reverse })
 		end,
 		desc = "[g]o [d]efinitions (Picker)",
 	},
 	{
 		"<leader>fu",
 		function()
-			require("snacks").picker.undo({ layout = M.common.layouts.vertical_reverse })
+			require("snacks").picker.undo({ layout = M.layouts.vertical_reverse })
 		end,
 		desc = "[f]ind [u]ndo",
 	},
@@ -308,8 +304,8 @@ M.picker = {
 	icons = {
 		ui = {
 			live = "",
-			-- hidden = "󰘓",
-			-- ignored = "",
+			hidden = "󰘓",
+			ignored = "",
 			selected = "󰱒 ",
 			unselected = "󰄱 ",
 		},
@@ -329,9 +325,15 @@ M.picker = {
 	sources = {
 		select = {
 			focus = "input",
-			layout = { preview = false, layout = M.common.layouts.input },
+			layout = { preview = false, layout = M.layouts.input },
 		},
-		explorer = { jump = { close = true }, layout = M.common.layouts.explorer },
+		files = {
+			hidden = true,
+			layout = M.layouts.vertical_reverse,
+		},
+		grep_buffers = { layout = M.layouts.vertical_reverse },
+		grep = { layout = M.layouts.vertical_reverse },
+		explorer = { jump = { close = true }, layout = M.layouts.explorer },
 	},
 }
 
