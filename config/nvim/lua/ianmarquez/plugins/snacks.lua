@@ -52,7 +52,7 @@ M.layouts = {
 			{ win = "list", border = "none", height = 0.3 },
 		},
 	},
-	select_small = {
+	list_only = {
 		layout = {
 			backdrop = true,
 			width = 0.4,
@@ -62,8 +62,6 @@ M.layouts = {
 			box = "vertical",
 			border = "rounded",
 			title = "{title}",
-			title_pos = "left",
-			{ win = "input", height = 1, border = "bottom" },
 			{ win = "list", border = "none" },
 		},
 	},
@@ -293,7 +291,7 @@ M.picker = {
 	},
 	sources = {
 		buffers = {
-			layout = M.layouts.select_small,
+			layout = M.layouts.list_only,
 			finder = "buffers",
 			format = "buffer",
 			hidden = false,
