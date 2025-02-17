@@ -359,9 +359,6 @@ M.config = {
 			},
 		},
 	},
-	init = function()
-		vim.api.nvim_set_hl(0, "SnacksPickerTitle", { fg = "#89dceb" })
-	end,
 	keys = M.keys,
 }
 

@@ -73,8 +73,10 @@ M.config = {
 				["<S-j>"] = { "scroll_documentation_down", "fallback" },
 				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 				["<C-e>"] = { "hide", "fallback" },
-				cmdline = M.default_binds,
 			}),
+			cmdline = {
+				keymap = M.default_keybinds,
+			},
 			appearance = {
 				use_nvim_cmp_as_default = false,
 				nerd_font_variant = "mono",
