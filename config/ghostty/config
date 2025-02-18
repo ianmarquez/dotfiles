@@ -1,5 +1,6 @@
 font-size = 17
 font-family = JetBrainsMonoNL Nerd Font Mono
+adjust-cell-height = 15%
 
 theme = catppuccin-mocha
 
@@ -9,14 +10,33 @@ window-height = 40
 window-width = 150
 window-position-y = 120
 window-position-x = 120
+window-padding-balance = true
+window-save-state = always
+macos-titlebar-style = transparent
 
 mouse-hide-while-typing = true
 
 background-blur = true
 background-opacity = 0.9
 
-cursor-style = block
 cursor-style-blink = true
+shell-integration-features = no-cursor
 
 auto-update = download
 
+# keybind
+keybind = cmd+shift+v=new_split:right
+keybind = cmd+shift+g=new_split:down
+
+keybind = cmd+shift+h=goto_split:left
+keybind = cmd+shift+j=goto_split:down
+keybind = cmd+shift+k=goto_split:up
+keybind = cmd+shift+l=goto_split:right
+
+keybind = cmd+alt+h=resize_split:left,10
+keybind = cmd+alt+j=resize_split:down,10
+keybind = cmd+alt+k=resize_split:up,10
+keybind = cmd+alt+l=resize_split:right,10
+
+keybind = cmd+shift+z=toggle_split_zoom
+keybind = cmd+shift+e=equalize_splits
