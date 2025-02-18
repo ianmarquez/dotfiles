@@ -12,3 +12,4 @@ brew install --cask font-jetbrains-mono-nerd-font
 brew install btop
 brew install docker
 brew install yazi
+brew install ghostty
