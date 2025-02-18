@@ -304,7 +304,7 @@ M.picker = {
 			},
 		},
 		git_branches = {
-			layout = M.layouts.vertical_reverse,
+			layout = "vscode",
 			win = {
 				input = {
 					keys = {
