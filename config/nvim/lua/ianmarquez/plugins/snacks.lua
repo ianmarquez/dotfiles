@@ -256,7 +256,7 @@ M.keys = {
 		function()
 			require("snacks").picker.undo({ layout = M.layouts.vertical_reverse })
 		end,
-		desc = "[f]ind [u]ndo",
+		desc = "[f]ind [u]ndo (Picker)",
 	},
 	{
 		"<leader>e",

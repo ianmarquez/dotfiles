@@ -17,7 +17,7 @@ macos-titlebar-style = transparent
 mouse-hide-while-typing = true
 
 background-blur = true
-background-opacity = 0.9
+background-opacity = 0.95
 
 cursor-style-blink = true
 shell-integration-features = no-cursor
