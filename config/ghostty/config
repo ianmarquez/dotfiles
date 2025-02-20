@@ -12,6 +12,9 @@ window-position-y = 120
 window-position-x = 120
 window-padding-balance = true
 window-save-state = always
+
+# mac specific
+macos-option-as-alt = true
 macos-titlebar-style = transparent
 
 mouse-hide-while-typing = true
