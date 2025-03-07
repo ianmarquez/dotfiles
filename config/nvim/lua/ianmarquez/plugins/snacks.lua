@@ -170,7 +170,7 @@ M.keys = {
 	{
 		"<leader>o",
 		function()
-			require("snacks").picker.lsp_symbols({ layout = M.layouts.vertical_reverse })
+			require("snacks").picker.lsp_symbols({ layout = { preset = "vscode", preview = "main" } })
 		end,
 		desc = "Sh[o]w Symbols in Current File (Picker)",
 	},
