@@ -177,7 +177,7 @@ M.keys = {
 	{
 		"<leader>fk",
 		function()
-			require("snacks").picker.keymaps({ layout = M.layouts.vertical_reverse })
+			require("snacks").picker.keymaps({ layout = { preset = "vscode" } })
 		end,
 		desc = "[f]ind [k]eymaps (Picker)",
 	},
