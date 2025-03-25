@@ -291,7 +291,7 @@ M.picker = {
 	},
 	sources = {
 		buffers = {
-			layout = M.layouts.list_only,
+			layout = { preset = "vscode", preview = "main" },
 			finder = "buffers",
 			format = "buffer",
 			hidden = false,
