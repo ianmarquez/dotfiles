@@ -80,6 +80,12 @@ return {
 			lualine_z = { "fancy_lsp_servers" },
 		},
 	},
+	config = function(_, opts)
+		require("mini.icons").setup()
+		require("mini.icons").mock_nvim_web_devicons()
+
+		require("lualine").setup(opts)
+	end,
 	keys = {
 		{
 			"<S-h>",
@@ -105,21 +111,5 @@ return {
 			desc = "Close all buffers except current (Tabs)",
 			mode = "n",
 		},
-		-- {
-		-- 	"<leader>bx",
-		-- 	function()
-		-- 		M:process_by_ordinal("bdelete", " Close buffer:")
-		-- 	end,
-		-- 	desc = "Close buffer (Tabs)",
-		-- 	mode = "n",
-		-- },
-		-- {
-		-- 	"<leader>bb",
-		-- 	function()
-		-- 		M:process_by_ordinal("b", " Go to buffer:")
-		-- 	end,
-		-- 	desc = "Go to buffer (Tabs)",
-		-- 	mode = "n",
-		-- },
 	},
 }
