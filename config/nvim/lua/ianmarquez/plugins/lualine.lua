@@ -40,7 +40,7 @@ return {
 			globalstatus = true,
 		},
 		tabline = {
-			lualine_b = {
+			lualine_a = {
 				{
 					"buffers",
 					-- buffers_color = {
