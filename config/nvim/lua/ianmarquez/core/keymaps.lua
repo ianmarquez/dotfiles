@@ -2,6 +2,9 @@ vim.g.mapleader = " " -- <leader>
 
 local keymap = vim.keymap -- for conciseness
 
+keymap.set("n", "q", "<nop>", { noremap = true })
+keymap.set("n", "<M-q>", "q", { noremap = true, desc = "Record Macro" })
+
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "No highlight" })
 keymap.set("n", "x", '"_x"')
 keymap.set("n", "J", "mzJ`z", { desc = "Delete line break" })
