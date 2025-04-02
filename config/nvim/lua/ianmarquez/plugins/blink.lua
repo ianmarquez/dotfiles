@@ -2,11 +2,11 @@ local M = {}
 
 M.default_binds = {
 	preset = "default",
-	["<Up>"] = { "select_prev", "fallback" },
-	["<Down>"] = { "select_next", "fallback" },
-	["<C-k>"] = { "select_prev", "fallback" },
-	["<C-j>"] = { "select_next", "fallback" },
-	["<Tab>"] = { "accept", "fallback" },
+	["<Up>"] = { "insert_prev", "fallback" },
+	["<Down>"] = { "insert_next", "fallback" },
+	["<C-k>"] = { "insert_prev", "fallback" },
+	["<C-j>"] = { "insert_next", "fallback" },
+	["<C-y>"] = { "select_and_accept", "fallback" },
 }
 
 M.combine = function(second_table, first_table)
