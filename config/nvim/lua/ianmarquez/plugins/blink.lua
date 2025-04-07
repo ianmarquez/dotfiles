@@ -6,7 +6,7 @@ M.default_binds = {
 	["<Down>"] = { "insert_next", "fallback" },
 	["<C-k>"] = { "insert_prev", "fallback" },
 	["<C-j>"] = { "insert_next", "fallback" },
-	["<C-y>"] = { "select_and_accept", "fallback" },
+	["<CR>"] = { "select_and_accept", "fallback" },
 }
 
 M.combine = function(second_table, first_table)

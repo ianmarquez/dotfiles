@@ -16,16 +16,12 @@ return {
 
 		vim.diagnostic.config({
 			virtual_text = true,
+			virtual_lines = false,
 			signs = true,
-			float = {
-				border = "rounded",
-				header = false,
-				focusable = true,
-			},
 		})
 
 		local opts = { noremap = true, silent = true }
-		local on_attach = function(_, bufnr)
+		local on_attach = function(client, bufnr)
 			opts.buffer = bufnr
 
 			opts.desc = "View [c]ode [a]ctions"
@@ -34,12 +30,6 @@ return {
 			opts.desc = "LSP [r]e[n]ame"
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
-			opts.desc = "Go to previous diagnostic"
-			keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
-
-			opts.desc = "Go to next diagnostic"
-			keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
-
 			opts.desc = "Show documentation for what is under cursor"
 			keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 
@@ -47,12 +37,31 @@ return {
 			keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 
 			opts.desc = "Typescript [o]rganize [i]mports"
-			keymap.set("n", "<leader>oi", ":OrganizeImports<CR>", opts) -- mapping to organize imports for typescript
+			keymap.set("n", "<leader>oi", function()
+				return client:exec_cmd({
+					command = "_typescript.organizeImports",
+					arguments = { vim.api.nvim_buf_get_name(bufnr) },
+				})
+			end, opts) -- mapping to organize imports for typescript
 
-			opts.desc = "Show diagnostic floating window"
-			keymap.set("n", "<leader>dk", vim.diagnostic.open_float, opts) -- show diagnostic floating window
+			opts.desc = "Toggle diagnostic lines"
+			keymap.set("n", "<leader>dk", function()
+				vim.diagnostic.config({
+					virtual_lines = not vim.diagnostic.config().virtual_lines,
+					virtual_text = not vim.diagnostic.config().virtual_text,
+				})
+			end, opts) -- show diagnostic floating window
+
+			opts.desc = "Go to previous diagnostic"
+			keymap.set("n", "[d", function()
+				vim.diagnostic.jump({ count = -1 })
+			end, opts) -- jump to previous diagnostic in buffer
+
+			opts.desc = "Go to next diagnostic"
+			keymap.set("n", "]d", function()
+				vim.diagnostic.jump({ count = 1 })
+			end, opts) -- jump to next diagnostic in buffer
 		end
-
 		-- used to enable autocompletion (assign to every lsp server config)
 
 		-- Change the Diagnostic symbols in the sign column (gutter)
@@ -61,25 +70,6 @@ return {
 			local hl = "DiagnosticSign" .. type
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
-
-		local function organize_imports()
-			local params = {
-				command = "_typescript.organizeImports",
-				arguments = { vim.api.nvim_buf_get_name(0) },
-				title = "",
-			}
-			vim.lsp.buf.execute_command(params)
-		end
-
-		lspconfig.ts_ls.setup({
-			on_attach = on_attach,
-			commands = {
-				OrganizeImports = {
-					organize_imports,
-					description = "Organize Imports",
-				},
-			},
-		})
 
 		local servers = {
 			"gleam",
@@ -90,6 +80,7 @@ return {
 			"pyright",
 			"cmake",
 			"templ",
+			"ts_ls",
 		}
 
 		for _, lsp in ipairs(servers) do
