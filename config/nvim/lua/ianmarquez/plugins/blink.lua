@@ -75,7 +75,18 @@ M.config = {
 				["<C-e>"] = { "hide", "fallback" },
 			}),
 			cmdline = {
-				keymap = M.default_keybinds,
+				completion = {
+					menu = {
+						auto_show = true,
+					},
+				},
+				keymap = {
+					["<Up>"] = { "select_prev", "fallback" },
+					["<Down>"] = { "select_next", "fallback" },
+					["<C-k>"] = { "select_prev", "fallback" },
+					["<C-j>"] = { "select_next", "fallback" },
+					["<C-y>"] = { "select_and_accept", "fallback" },
+				},
 			},
 			appearance = {
 				use_nvim_cmp_as_default = false,
