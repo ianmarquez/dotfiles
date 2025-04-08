@@ -36,35 +36,6 @@ M.layouts = {
 			{ win = "list", border = "none", title = " File Explorer {flags}", title_pos = "left" },
 		},
 	},
-	vertical_reverse = {
-		layout = {
-			backdrop = true,
-			width = 0.5,
-			min_width = 80,
-			height = 0.8,
-			min_height = 30,
-			box = "vertical",
-			border = "rounded",
-			title_pos = "center",
-			title = "{title} {live} {flags}",
-			{ win = "input", height = 1, border = "bottom" },
-			{ win = "preview", title = "{preview}", border = "bottom" },
-			{ win = "list", border = "none", height = 0.3 },
-		},
-	},
-	list_only = {
-		layout = {
-			backdrop = true,
-			width = 0.4,
-			min_width = 40,
-			height = 0.4,
-			min_height = 3,
-			box = "vertical",
-			border = "rounded",
-			title = "{title}",
-			{ win = "list", border = "none" },
-		},
-	},
 }
 
 M.dashboard = {
@@ -134,7 +105,7 @@ M.keys = {
 		"<leader>fq",
 		function()
 			require("snacks").picker.qflist({
-				layout = M.layouts.vertical_reverse,
+				layout = { preset = "vertical" },
 			})
 		end,
 		desc = "[f]ind in [q]uickfix list (Picker)",
@@ -149,7 +120,8 @@ M.keys = {
 	{
 		"<leader>fc",
 		function()
-			require("snacks").picker.grep_buffers({})
+			-- require("snacks").picker.grep_buffers({})
+			require("snacks").picker.grep_buffers({ layout = { preset = "vscode", preview = "main" } })
 		end,
 		desc = "[f]ind in [c]urrent Buffer (Picker)",
 	},
@@ -184,7 +156,7 @@ M.keys = {
 	{
 		"<leader>fh",
 		function()
-			require("snacks").picker.help({ layout = M.layouts.vertical_reverse })
+			require("snacks").picker.help({ layout = { preset = "vertical" } })
 		end,
 		desc = "[f]ind [h]elp documents (Picker)",
 	},
@@ -198,21 +170,21 @@ M.keys = {
 	{
 		"<leader>fg",
 		function()
-			require("snacks").picker.git_diff({ layout = M.layouts.vertical_reverse })
+			require("snacks").picker.git_diff({ layout = { preset = "vertical" } })
 		end,
 		desc = "[f]ind [g]it diff (Picker)",
 	},
 	{
 		"<leader>gf",
 		function()
-			require("snacks").picker.git_log_file({ layout = M.layouts.vertical_reverse })
+			require("snacks").picker.git_log_file({ layout = { preset = "vertical" } })
 		end,
 		desc = "[g]it current [f]ile History (Git)",
 	},
 	{
 		"<leader>gl",
 		function()
-			require("snacks").picker.git_log({ layout = M.layouts.vertical_reverse })
+			require("snacks").picker.git_log({ layout = { preset = "vertical" } })
 		end,
 		desc = "[g]it [l]og current working directory (Git)",
 	},
@@ -233,28 +205,28 @@ M.keys = {
 	{
 		"gf",
 		function()
-			require("snacks").picker.lsp_references({ layout = M.layouts.vertical_reverse })
+			require("snacks").picker.lsp_references({ layout = { preset = "vertical" } })
 		end,
 		desc = "[g]o LSP re[f]erences (Picker)",
 	},
 	{
 		"gD",
 		function()
-			require("snacks").picker.lsp_type_definitions({ layout = M.layouts.vertical_reverse })
+			require("snacks").picker.lsp_type_definitions({ layout = { preset = "vertical" } })
 		end,
 		desc = "[g]o to type [D]efinitions (Picker)",
 	},
 	{
 		"gd",
 		function()
-			require("snacks").picker.lsp_definitions({ layout = M.layouts.vertical_reverse })
+			require("snacks").picker.lsp_definitions({ layout = { preset = "vertical" } })
 		end,
 		desc = "[g]o [d]efinitions (Picker)",
 	},
 	{
 		"<leader>fu",
 		function()
-			require("snacks").picker.undo({ layout = M.layouts.vertical_reverse })
+			require("snacks").picker.undo({ layout = { preset = "vertical" } })
 		end,
 		desc = "[f]ind [u]ndo (Picker)",
 	},
@@ -315,7 +287,7 @@ M.picker = {
 			},
 		},
 		git_status = {
-			layout = M.layouts.vertical_reverse,
+			layout = { preset = "vertical" },
 			win = {
 				input = {
 					keys = {
