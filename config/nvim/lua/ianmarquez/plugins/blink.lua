@@ -6,7 +6,7 @@ M.default_binds = {
 	["<Down>"] = { "insert_next", "fallback" },
 	["<C-k>"] = { "insert_prev", "fallback" },
 	["<C-j>"] = { "insert_next", "fallback" },
-	["<CR>"] = { "select_and_accept", "fallback" },
+	["<S-CR>"] = { "select_and_accept", "fallback" },
 }
 
 M.combine = function(second_table, first_table)
@@ -69,8 +69,8 @@ M.config = {
 				},
 			},
 			keymap = M.combine(M.default_binds, {
-				["<S-k>"] = { "scroll_documentation_up", "fallback" },
-				["<S-j>"] = { "scroll_documentation_down", "fallback" },
+				["<C-u>"] = { "scroll_documentation_up", "fallback" },
+				["<C-d>"] = { "scroll_documentation_down", "fallback" },
 				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 				["<C-e>"] = { "hide", "fallback" },
 			}),
