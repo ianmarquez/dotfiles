@@ -89,15 +89,15 @@ return {
 			})
 		end
 
-		lspconfig["omnisharp"].setup({
-			on_attach = on_attach,
-			-- root_dir = function(fname)
-			--   local primary = lspconfig.util.root_pattern("*.sln")(fname)
-			--   local fallback = lspconfig.util.root_pattern("*.csproj")(fname)
-			--   return primary or fallback
-			-- end,
-			cmd = { vim.fn.stdpath("data") .. "/mason/bin/omnisharp" },
-		})
+		-- lspconfig["omnisharp"].setup({
+		-- 	on_attach = on_attach,
+		-- 	-- root_dir = function(fname)
+		-- 	--   local primary = lspconfig.util.root_pattern("*.sln")(fname)
+		-- 	--   local fallback = lspconfig.util.root_pattern("*.csproj")(fname)
+		-- 	--   return primary or fallback
+		-- 	-- end,
+		-- 	cmd = { vim.fn.stdpath("data") .. "/mason/bin/omnisharp" },
+		-- })
 
 		-- configure svelte server
 		lspconfig["svelte"].setup({
