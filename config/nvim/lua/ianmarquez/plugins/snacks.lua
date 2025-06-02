@@ -309,6 +309,7 @@ M.picker = {
 M.config = {
 	"folke/snacks.nvim",
 	lazy = false,
+	priority = 1001,
 	opts = {
 		dashboard = M.dashboard,
 		explorer = { replace_netrw = true },

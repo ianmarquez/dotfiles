@@ -13,3 +13,5 @@ brew install btop
 brew install docker
 brew install yazi
 brew install ghostty
+brew install imagemagick
+brew install gs
