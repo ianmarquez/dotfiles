@@ -80,7 +80,6 @@ return {
 			"pyright",
 			"cmake",
 			"templ",
-			"ts_ls",
 		}
 
 		for _, lsp in ipairs(servers) do
@@ -98,6 +97,12 @@ return {
 		-- 	-- end,
 		-- 	cmd = { vim.fn.stdpath("data") .. "/mason/bin/omnisharp" },
 		-- })
+
+		lspconfig["ts_ls"].setup({
+			root_dir = require("lspconfig.util").root_pattern("tsconfig.json", "package.json", ".git"),
+			on_attach = on_attach,
+			filetypes = { "typescript", "typescriptreact", "svelte" },
+		})
 
 		-- configure svelte server
 		lspconfig["svelte"].setup({
