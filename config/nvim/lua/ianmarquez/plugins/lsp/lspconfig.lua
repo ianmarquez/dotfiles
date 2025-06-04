@@ -79,7 +79,6 @@ return {
 			"prismals",
 			"pyright",
 			"cmake",
-			"templ",
 		}
 
 		for _, lsp in ipairs(servers) do
@@ -99,7 +98,7 @@ return {
 		-- })
 
 		lspconfig["ts_ls"].setup({
-			root_dir = require("lspconfig.util").root_pattern("tsconfig.json", "package.json", ".git"),
+			root_dir = util.root_pattern("tsconfig.json", "package.json", ".git"),
 			on_attach = on_attach,
 			filetypes = { "typescript", "typescriptreact", "svelte" },
 		})
@@ -125,6 +124,7 @@ return {
 		-- configure emmet language server
 		lspconfig["emmet_ls"].setup({
 			on_attach = on_attach,
+			root_dir = util.root_pattern("tsconfig.json", "package.json", ".git", "go.work", "go.mod", ".git"),
 			filetypes = {
 				"html",
 				"typescriptreact",
@@ -138,6 +138,14 @@ return {
 			},
 		})
 
+		lspconfig["templ"].setup({
+			on_attach = on_attach,
+			root_dir = util.root_pattern(".git", "go.work", "go.mod", ".git"),
+			filetypes = {
+				"templ",
+			},
+		})
+
 		-- configure gopls server
 		lspconfig["gopls"].setup({
 			on_attach = on_attach,
@@ -146,8 +154,14 @@ return {
 			root_dir = util.root_pattern("go.work", "go.mod", ".git"),
 			settings = {
 				gopls = {
+					usePlaceholders = true,
+					staticcheck = true,
+					directoryFilters = { "-.git", "-node_modules" },
+					-- THIS is the important part:
+					experimental = {
+						fileExtensions = { "go", "templ" },
+					},
 					completeUnimported = true,
-					-- usePlaceholders = true,
 					analyses = {
 						unusedparams = true,
 					},
