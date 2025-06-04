@@ -1,0 +1,49 @@
+[user]
+  name = Ian Marquez
+  email = regilmarquez123@gmail.com
+  useConfigOnly = true
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+
+[core]
+  compression = 9
+  whitespace = error
+  preloadindex = true
+
+[advice]
+  addEmptyPathSpec = false
+  pushNonFastForward = false
+  statusHints = false
+
+[init]
+  defaultBranch = main
+
+[status]
+  branch = true
+  showStash = true
+  showUntrackedFiles = all
+
+[diff]
+  context = 3
+  renames = copies
+  interHunkContext = 10
+
+[push]
+  default = current
+  followTags = true
+
+[pull]
+  default = true
+  rebase = true
+
+[rebase]
+  autoStash = true
+  missingCommitsCheck = warn
+
+# Add new paths for work directories as needed
+[includeIf "gitdir:~/Desktop/work/aleph/"]
+  path = ~/Desktop/work/aleph/.gitconfig
