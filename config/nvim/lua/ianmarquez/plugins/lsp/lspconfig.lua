@@ -12,63 +12,16 @@ return {
 		local lspconfig = require("lspconfig")
 		local util = require("lspconfig/util")
 
-		local keymap = vim.keymap
+		local function on_attach(client, bufnr)
+			for _, existing_client in pairs(vim.lsp.get_active_clients({ bufnr = bufnr })) do
+				if existing_client.name == client.name and existing_client.id ~= client.id then
+					vim.lsp.stop_client(client.id)
+					return
+				end
+			end
 
-		vim.diagnostic.config({
-			virtual_text = true,
-			virtual_lines = false,
-			signs = true,
-		})
-
-		local opts = { noremap = true, silent = true }
-		local on_attach = function(client, bufnr)
-			opts.buffer = bufnr
-
-			opts.desc = "View [c]ode [a]ctions"
-			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-
-			opts.desc = "LSP [r]e[n]ame"
-			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-
-			opts.desc = "Show documentation for what is under cursor"
-			keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
-
-			opts.desc = "[r]e[s]tart LSP"
-			keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
-
-			opts.desc = "Typescript [o]rganize [i]mports"
-			keymap.set("n", "<leader>oi", function()
-				return client:exec_cmd({
-					command = "_typescript.organizeImports",
-					arguments = { vim.api.nvim_buf_get_name(bufnr) },
-				})
-			end, opts) -- mapping to organize imports for typescript
-
-			opts.desc = "Toggle diagnostic lines"
-			keymap.set("n", "<leader>dk", function()
-				vim.diagnostic.config({
-					virtual_lines = not vim.diagnostic.config().virtual_lines,
-					virtual_text = not vim.diagnostic.config().virtual_text,
-				})
-			end, opts) -- show diagnostic floating window
-
-			opts.desc = "Go to previous diagnostic"
-			keymap.set("n", "[d", function()
-				vim.diagnostic.jump({ count = -1 })
-			end, opts) -- jump to previous diagnostic in buffer
-
-			opts.desc = "Go to next diagnostic"
-			keymap.set("n", "]d", function()
-				vim.diagnostic.jump({ count = 1 })
-			end, opts) -- jump to next diagnostic in buffer
-		end
-		-- used to enable autocompletion (assign to every lsp server config)
-
-		-- Change the Diagnostic symbols in the sign column (gutter)
-		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-		for type, icon in pairs(signs) do
-			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+			-- Normal on_attach setup here
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
 		end
 
 		local servers = {
@@ -88,7 +41,6 @@ return {
 		end
 
 		-- lspconfig["omnisharp"].setup({
-		-- 	on_attach = on_attach,
 		-- 	-- root_dir = function(fname)
 		-- 	--   local primary = lspconfig.util.root_pattern("*.sln")(fname)
 		-- 	--   local fallback = lspconfig.util.root_pattern("*.csproj")(fname)
@@ -129,10 +81,8 @@ return {
 				"html",
 				"typescriptreact",
 				"javascriptreact",
-				"css",
-				"sass",
-				"scss",
-				"less",
+				"vue",
+				"solid",
 				"svelte",
 				"templ",
 			},
@@ -148,8 +98,8 @@ return {
 
 		-- configure gopls server
 		lspconfig["gopls"].setup({
-			on_attach = on_attach,
 			cmd = { "gopls" },
+			on_attach = on_attach,
 			filetypes = { "go", "gomod", "gowork", "gotmpl", "templ" },
 			root_dir = util.root_pattern("go.work", "go.mod", ".git"),
 			settings = {
