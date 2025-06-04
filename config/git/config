@@ -47,3 +47,6 @@
 # Add new paths for work directories as needed
 [includeIf "gitdir:~/Desktop/work/aleph/"]
   path = ~/Desktop/work/aleph/.gitconfig
+
+[includeIf "gitdir:~/Desktop/work/"]
+  path = ~/Desktop/work/.gitconfig
