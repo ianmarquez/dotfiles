@@ -48,6 +48,11 @@ local setUpDiagnostics = function()
 	end
 end
 
+vim.api.nvim_create_user_command("LspRestartAll", function()
+	vim.lsp.stop_client(vim.lsp.get_active_clients(), true)
+	vim.cmd("edit")
+end, {})
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
 		local opts = { noremap = true, silent = true }
@@ -67,14 +72,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 
 		opts.desc = "[r]e[s]tart LSP"
-		keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+		keymap.set("n", "<leader>rs", ":LspRestartAll<CR>", opts) -- mapping to restart lsp if necessary
 
 		opts.desc = "Typescript [o]rganize [i]mports"
 		keymap.set("n", "<leader>oi", function()
-			return client:exec_cmd({
-				command = "_typescript.organizeImports",
-				arguments = { vim.api.nvim_buf_get_name(bufnr) },
-			})
+			if client ~= nil then
+				return client:exec_cmd({
+					title = "TS Organize Imports",
+					command = "_typescript.organizeImports",
+					arguments = { vim.api.nvim_buf_get_name(bufnr) },
+				})
+			end
 		end, opts) -- mapping to organize imports for typescript
 
 		opts.desc = "Toggle diagnostic lines"
