@@ -5,4 +5,6 @@ brew install lazydocker
 brew install ripgrep
 brew install zoxide
 brew install go
+brew install imagemagick
+brew install gs
 
