@@ -13,7 +13,7 @@ return {
 		local util = require("lspconfig/util")
 
 		local function on_attach(client, bufnr)
-			for _, existing_client in pairs(vim.lsp.get_active_clients({ bufnr = bufnr })) do
+			for _, existing_client in pairs(vim.lsp.get_clients({ bufnr = bufnr })) do
 				if existing_client.name == client.name and existing_client.id ~= client.id then
 					vim.lsp.stop_client(client.id)
 					return
