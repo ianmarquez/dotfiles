@@ -19,9 +19,6 @@ return {
 					return
 				end
 			end
-
-			-- Normal on_attach setup here
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
 		end
 
 		local servers = {
