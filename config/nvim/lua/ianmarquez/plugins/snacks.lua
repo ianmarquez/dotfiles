@@ -254,10 +254,10 @@ M.picker = {
 		input = {
 			keys = {
 				["<Esc>"] = { "close", mode = { "n", "i" } },
-				["J"] = { "preview_scroll_down", mode = { "n", "i" } },
-				["K"] = { "preview_scroll_up", mode = { "n", "i" } },
-				["H"] = { "preview_scroll_left", mode = { "n", "i" } },
-				["L"] = { "preview_scroll_right", mode = { "n", "i" } },
+				["<C-j>"] = { "preview_scroll_down", mode = { "n", "i" } },
+				["<C-k>"] = { "preview_scroll_up", mode = { "n", "i" } },
+				["<C-h>"] = { "preview_scroll_left", mode = { "n", "i" } },
+				["<C-l"] = { "preview_scroll_right", mode = { "n", "i" } },
 			},
 		},
 	},
