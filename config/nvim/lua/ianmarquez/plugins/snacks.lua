@@ -126,6 +126,13 @@ M.keys = {
 		desc = "[f]ind in [c]urrent Buffer (Picker)",
 	},
 	{
+		"<leader>fd",
+		function()
+			require("snacks").picker.diagnostics_buffer({ layout = { preset = "vscode", preview = "main" } })
+		end,
+		desc = "[f]ind [d]iagnostics in current buffer (Picker)",
+	},
+	{
 		"<leader>bb",
 		function()
 			require("snacks").picker.buffers()
@@ -135,7 +142,7 @@ M.keys = {
 	{
 		"<leader>ff",
 		function()
-			require("snacks").picker.smart()
+			require("snacks").picker.files()
 		end,
 		desc = "[f]ind [f]iles (Picker)",
 	},
