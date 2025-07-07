@@ -49,6 +49,11 @@ return {
 				"omnisharp",
 			},
 			-- auto-install configured servers (with lspconfig)
+			automatic_enable = {
+				exclude = {
+					"ts_ls",
+				},
+			},
 			automatic_installation = true, -- not the same as ensure_installed
 		})
 

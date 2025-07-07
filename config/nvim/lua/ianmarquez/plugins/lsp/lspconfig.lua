@@ -1,3 +1,18 @@
+local setUpDiagnostics = function()
+	vim.diagnostic.config({
+		virtual_text = true,
+		virtual_lines = false,
+		signs = true,
+	})
+
+	-- Change the Diagnostic symbols in the sign column (gutter)
+	local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+	for type, icon in pairs(signs) do
+		local hl = "DiagnosticSign" .. type
+		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+	end
+end
+
 return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
@@ -13,12 +28,51 @@ return {
 		local util = require("lspconfig/util")
 
 		local function on_attach(client, bufnr)
-			for _, existing_client in pairs(vim.lsp.get_clients({ bufnr = bufnr })) do
-				if existing_client.name == client.name and existing_client.id ~= client.id then
-					vim.lsp.stop_client(client.id)
-					return
+			local opts = { noremap = true, silent = true }
+			local keymap = vim.keymap
+
+			setUpDiagnostics()
+
+			opts.desc = "View [c]ode [a]ctions"
+			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+
+			opts.desc = "LSP [r]e[n]ame"
+			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+
+			opts.desc = "Show documentation for what is under cursor"
+			keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
+
+			opts.desc = "[r]e[s]tart LSP"
+			keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+
+			opts.desc = "Typescript [o]rganize [i]mports"
+			keymap.set("n", "<leader>oi", function()
+				if client ~= nil then
+					return client:exec_cmd({
+						title = "TS Organize Imports",
+						command = "_typescript.organizeImports",
+						arguments = { vim.api.nvim_buf_get_name(bufnr) },
+					})
 				end
-			end
+			end, opts) -- mapping to organize imports for typescript
+
+			opts.desc = "Toggle diagnostic lines"
+			keymap.set("n", "<leader>dk", function()
+				vim.diagnostic.config({
+					virtual_lines = not vim.diagnostic.config().virtual_lines,
+					virtual_text = not vim.diagnostic.config().virtual_text,
+				})
+			end, opts) -- show diagnostic floating window
+
+			opts.desc = "Go to previous diagnostic"
+			keymap.set("n", "[d", function()
+				vim.diagnostic.jump({ count = -1 })
+			end, opts) -- jump to previous diagnostic in buffer
+
+			opts.desc = "Go to next diagnostic"
+			keymap.set("n", "]d", function()
+				vim.diagnostic.jump({ count = 1 })
+			end, opts) -- jump to next diagnostic in buffer
 		end
 
 		local servers = {

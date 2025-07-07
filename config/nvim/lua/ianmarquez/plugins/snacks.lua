@@ -135,7 +135,7 @@ M.keys = {
 	{
 		"<leader>ff",
 		function()
-			require("snacks").picker.files()
+			require("snacks").picker.smart()
 		end,
 		desc = "[f]ind [f]iles (Picker)",
 	},
