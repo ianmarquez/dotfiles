@@ -32,3 +32,20 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 		vim.opt_local.wrap = true
 	end,
 })
+
+-- Autocommand to toggle relative line numbers based on mode
+vim.api.nvim_create_augroup("ToggleRelativeLineNumbers", { clear = true })
+
+vim.api.nvim_create_autocmd("InsertEnter", {
+	group = "ToggleRelativeLineNumbers",
+	callback = function()
+		vim.opt.relativenumber = false
+	end,
+})
+
+vim.api.nvim_create_autocmd("InsertLeave", {
+	group = "ToggleRelativeLineNumbers",
+	callback = function()
+		vim.opt.relativenumber = true
+	end,
+})
