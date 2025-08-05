@@ -48,5 +48,5 @@
 [includeIf "gitdir:~/Desktop/work/aleph/"]
   path = ~/Desktop/work/aleph/.gitconfig
 
-[includeIf "gitdir:~/Desktop/work/"]
-  path = ~/Desktop/work/.gitconfig
+[includeIf "gitdir:~/Desktop/work/bilue/"]
+  path = ~/Desktop/work/bilue/.gitconfig
