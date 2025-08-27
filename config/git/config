@@ -6,7 +6,7 @@
 	filemode = true
 	bare = false
 	logallrefupdates = true
-	ignorecase = true
+	ignorecase = false
 	precomposeunicode = true
 
 [core]
