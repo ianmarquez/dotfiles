@@ -50,3 +50,6 @@
 
 [includeIf "gitdir:~/Desktop/work/bilue/"]
   path = ~/Desktop/work/bilue/.gitconfig
+
+[includeIf "gitdir:~/Desktop/work/th/"]
+  path = ~/Desktop/work/th/.gitconfig
