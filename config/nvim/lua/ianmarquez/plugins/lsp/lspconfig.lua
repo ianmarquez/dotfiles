@@ -185,6 +185,7 @@ return {
 		vim.filetype.add({
 			extension = {
 				mdx = "jsx",
+				mjs = "javascript",
 				postcss = "css",
 				sass = "css",
 				less = "css",

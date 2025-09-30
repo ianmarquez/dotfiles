@@ -2,7 +2,7 @@ font-size = 15
 font-family = JetBrainsMonoNL Nerd Font Mono
 adjust-cell-height = 15%
 
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
 
 adjust-underline-position = 4
 
