@@ -28,18 +28,18 @@ shell-integration-features = no-cursor
 auto-update = download
 
 # keybind
-# keybind = cmd+shift+v=new_split:right
-# keybind = cmd+shift+g=new_split:down
-# 
-# keybind = cmd+shift+h=goto_split:left
-# keybind = cmd+shift+j=goto_split:down
-# keybind = cmd+shift+k=goto_split:up
-# keybind = cmd+shift+l=goto_split:right
-# 
-# keybind = cmd+alt+h=resize_split:left,10
-# keybind = cmd+alt+j=resize_split:down,10
-# keybind = cmd+alt+k=resize_split:up,10
-# keybind = cmd+alt+l=resize_split:right,10
-# 
-# keybind = cmd+shift+z=toggle_split_zoom
-# keybind = cmd+shift+e=equalize_splits
+keybind = cmd+shift+v=new_split:right
+keybind = cmd+shift+g=new_split:down
+
+keybind = cmd+shift+h=goto_split:left
+keybind = cmd+shift+j=goto_split:down
+keybind = cmd+shift+k=goto_split:up
+keybind = cmd+shift+l=goto_split:right
+
+keybind = cmd+alt+h=resize_split:left,10
+keybind = cmd+alt+j=resize_split:down,10
+keybind = cmd+alt+k=resize_split:up,10
+keybind = cmd+alt+l=resize_split:right,10
+
+keybind = cmd+shift+z=toggle_split_zoom
+keybind = cmd+shift+e=equalize_splits
