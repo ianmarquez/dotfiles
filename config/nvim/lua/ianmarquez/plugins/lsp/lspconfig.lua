@@ -1,18 +1,3 @@
-local setUpDiagnostics = function()
-	vim.diagnostic.config({
-		virtual_text = true,
-		virtual_lines = false,
-		signs = true,
-	})
-
-	-- Change the Diagnostic symbols in the sign column (gutter)
-	local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-	for type, icon in pairs(signs) do
-		local hl = "DiagnosticSign" .. type
-		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-	end
-end
-
 return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
@@ -24,16 +9,12 @@ return {
 		},
 	},
 	config = function()
-		-- local util = require("lspconfig/util")
-
 		vim.api.nvim_create_autocmd("LspAttach", {
 			callback = function(args)
 				local bufnr = args.buf
 				local client = vim.lsp.get_client_by_id(args.data.client_id)
 				local opts = { noremap = true, silent = true }
 				local keymap = vim.keymap
-
-				setUpDiagnostics()
 
 				opts.desc = "View [c]ode [a]ctions"
 				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
@@ -57,14 +38,6 @@ return {
 						})
 					end
 				end, opts) -- mapping to organize imports for typescript
-
-				opts.desc = "Toggle diagnostic lines"
-				keymap.set("n", "<leader>dk", function()
-					vim.diagnostic.config({
-						virtual_lines = not vim.diagnostic.config().virtual_lines,
-						virtual_text = not vim.diagnostic.config().virtual_text,
-					})
-				end, opts) -- show diagnostic floating window
 
 				opts.desc = "Go to previous diagnostic"
 				keymap.set("n", "[d", function()
