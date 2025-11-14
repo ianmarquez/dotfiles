@@ -59,13 +59,13 @@ M.input = {
 }
 
 M.keys = {
-	{
-		"<c-/>",
-		function()
-			require("snacks").terminal.toggle()
-		end,
-		desc = "Terminal",
-	},
+	-- {
+	-- 	"<c-/>",
+	-- 	function()
+	-- 		require("snacks").terminal.toggle()
+	-- 	end,
+	-- 	desc = "Terminal",
+	-- },
 	{
 		"<leader>tv",
 		function()
