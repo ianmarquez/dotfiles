@@ -9,6 +9,8 @@ return {
 		},
 	},
 	config = function()
+		local util = require("lspconfig.util")
+
 		vim.api.nvim_create_autocmd("LspAttach", {
 			callback = function(args)
 				local bufnr = args.buf
@@ -67,7 +69,7 @@ return {
 		end
 
 		vim.lsp.config("ts_ls", {
-			-- root_dir = util.root_pattern("tsconfig.json", "package.json", ".git"),
+			root_dir = util.root_pattern("tsconfig.json", "package.json", ".git"),
 			filetypes = { "typescript", "typescriptreact", "svelte" },
 			cmd = { "typescript-language-server", "--stdio" },
 			workspace_required = true,
@@ -77,7 +79,7 @@ return {
 
 		-- configure svelte server
 		vim.lsp.config("svelte", {
-			-- root_dir = util.root_pattern("tsconfig.json", "package.json", ".git"),
+			root_dir = util.root_pattern("tsconfig.json", "package.json", ".git"),
 			filetypes = { "svelte" },
 		})
 		vim.lsp.enable("svelte")
