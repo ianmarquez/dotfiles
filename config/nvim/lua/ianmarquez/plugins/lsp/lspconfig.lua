@@ -1,5 +1,6 @@
 return {
 	"neovim/nvim-lspconfig",
+	commit = "f54cc14a3d0984bbc1efd02a32b4e113d19e0d8e", -- Replace with the desired commit hash
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		{
@@ -9,49 +10,32 @@ return {
 		},
 	},
 	config = function()
-		local util = require("lspconfig.util")
+		local on_attach = function()
+			local opts = { noremap = true, silent = true }
+			local keymap = vim.keymap
 
-		vim.api.nvim_create_autocmd("LspAttach", {
-			callback = function(args)
-				local bufnr = args.buf
-				local client = vim.lsp.get_client_by_id(args.data.client_id)
-				local opts = { noremap = true, silent = true }
-				local keymap = vim.keymap
+			opts.desc = "View [c]ode [a]ctions"
+			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 
-				opts.desc = "View [c]ode [a]ctions"
-				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+			opts.desc = "LSP [r]e[n]ame"
+			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
-				opts.desc = "LSP [r]e[n]ame"
-				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+			opts.desc = "Show documentation for what is under cursor"
+			keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 
-				opts.desc = "Show documentation for what is under cursor"
-				keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
+			opts.desc = "[r]e[s]tart LSP"
+			keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 
-				opts.desc = "[r]e[s]tart LSP"
-				keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+			opts.desc = "Go to previous diagnostic"
+			keymap.set("n", "[d", function()
+				vim.diagnostic.jump({ count = -1 })
+			end, opts) -- jump to previous diagnostic in buffer
 
-				opts.desc = "Typescript [o]rganize [i]mports"
-				keymap.set("n", "<leader>oi", function()
-					if client ~= nil then
-						return client:exec_cmd({
-							title = "TS Organize Imports",
-							command = "_typescript.organizeImports",
-							arguments = { vim.api.nvim_buf_get_name(bufnr) },
-						})
-					end
-				end, opts) -- mapping to organize imports for typescript
-
-				opts.desc = "Go to previous diagnostic"
-				keymap.set("n", "[d", function()
-					vim.diagnostic.jump({ count = -1 })
-				end, opts) -- jump to previous diagnostic in buffer
-
-				opts.desc = "Go to next diagnostic"
-				keymap.set("n", "]d", function()
-					vim.diagnostic.jump({ count = 1 })
-				end, opts) -- jump to next diagnostic in buffer
-			end,
-		})
+			opts.desc = "Go to next diagnostic"
+			keymap.set("n", "]d", function()
+				vim.diagnostic.jump({ count = 1 })
+			end, opts) -- jump to next diagnostic in buffer
+		end
 
 		local servers = {
 			"gleam",
@@ -64,28 +48,42 @@ return {
 		}
 
 		for _, lsp in ipairs(servers) do
-			vim.lsp.config(lsp, {})
+			vim.lsp.config(lsp, { on_attach = on_attach })
 			vim.lsp.enable(lsp)
 		end
 
 		vim.lsp.config("ts_ls", {
-			root_dir = util.root_pattern("tsconfig.json", "package.json", ".git"),
+			-- root_dir = util.root_pattern("package.json", "tsconfig.json", ".git"),
 			filetypes = { "typescript", "typescriptreact", "svelte" },
 			cmd = { "typescript-language-server", "--stdio" },
 			workspace_required = true,
 			root_markers = { "tsconfig.json", "package.json", "jsconfig.json", ".git" },
+			on_attach = function(client, bufnr)
+				on_attach()
+				vim.keymap.set("n", "<leader>oi", function()
+					if client ~= nil then
+						return client:exec_cmd({
+							title = "TS Organize Imports",
+							command = "_typescript.organizeImports",
+							arguments = { vim.api.nvim_buf_get_name(bufnr) },
+						})
+					end
+				end, { noremap = true, silent = true, desc = "Typescript [o]rganize [i]mports" }) -- mapping to organize imports for typescript
+			end,
 		})
 		vim.lsp.enable("ts_ls")
 
 		-- configure svelte server
 		vim.lsp.config("svelte", {
-			root_dir = util.root_pattern("tsconfig.json", "package.json", ".git"),
+			-- root_dir = util.root_pattern("tsconfig.json", "package.json", ".git"),
+			on_attach = on_attach,
 			filetypes = { "svelte" },
 		})
 		vim.lsp.enable("svelte")
 
 		-- configure graphql language server
 		vim.lsp.config("graphql", {
+			on_attach = on_attach,
 			filetypes = {
 				"graphql",
 				"gql",
@@ -98,6 +96,7 @@ return {
 
 		-- configure emmet language server
 		vim.lsp.config("emmet_ls", {
+			on_attach = on_attach,
 			filetypes = {
 				"html",
 				"typescriptreact",
@@ -111,6 +110,7 @@ return {
 		vim.lsp.enable("emmet_ls")
 
 		vim.lsp.config("templ", {
+			on_attach = on_attach,
 			filetypes = {
 				"templ",
 			},
@@ -120,6 +120,7 @@ return {
 		-- configure gopls server
 		vim.lsp.config("gopls", {
 			cmd = { "gopls" },
+			on_attach = on_attach,
 			filetypes = { "go", "gomod", "gowork", "gotmpl", "templ" },
 			-- root_dir = util.root_pattern("go.work", "go.mod", ".git"),
 			settings = {
@@ -142,6 +143,7 @@ return {
 
 		-- configure lua server (with special settings)
 		vim.lsp.config("lua_ls", {
+			on_attach = on_attach,
 			settings = {
 				Lua = {
 					diagnostics = {
