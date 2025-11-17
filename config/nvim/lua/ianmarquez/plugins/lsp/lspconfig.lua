@@ -1,6 +1,5 @@
 return {
 	"neovim/nvim-lspconfig",
-	commit = "f54cc14a3d0984bbc1efd02a32b4e113d19e0d8e", -- Replace with the desired commit hash
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		{
