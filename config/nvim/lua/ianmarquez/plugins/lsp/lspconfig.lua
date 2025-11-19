@@ -1,3 +1,30 @@
+local on_attach = function()
+	local opts = { noremap = true, silent = true }
+	local keymap = vim.keymap
+
+	opts.desc = "View [c]ode [a]ctions"
+	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+
+	opts.desc = "LSP [r]e[n]ame"
+	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+
+	opts.desc = "Show documentation for what is under cursor"
+	keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
+
+	opts.desc = "[r]e[s]tart LSP"
+	keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+
+	opts.desc = "Go to previous diagnostic"
+	keymap.set("n", "[d", function()
+		vim.diagnostic.jump({ count = -1 })
+	end, opts) -- jump to previous diagnostic in buffer
+
+	opts.desc = "Go to next diagnostic"
+	keymap.set("n", "]d", function()
+		vim.diagnostic.jump({ count = 1 })
+	end, opts) -- jump to next diagnostic in buffer
+end
+
 return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
@@ -9,41 +36,18 @@ return {
 		},
 	},
 	config = function()
-		local on_attach = function()
-			local opts = { noremap = true, silent = true }
-			local keymap = vim.keymap
-
-			opts.desc = "View [c]ode [a]ctions"
-			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-
-			opts.desc = "LSP [r]e[n]ame"
-			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-
-			opts.desc = "Show documentation for what is under cursor"
-			keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
-
-			opts.desc = "[r]e[s]tart LSP"
-			keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
-
-			opts.desc = "Go to previous diagnostic"
-			keymap.set("n", "[d", function()
-				vim.diagnostic.jump({ count = -1 })
-			end, opts) -- jump to previous diagnostic in buffer
-
-			opts.desc = "Go to next diagnostic"
-			keymap.set("n", "]d", function()
-				vim.diagnostic.jump({ count = 1 })
-			end, opts) -- jump to next diagnostic in buffer
-		end
-
 		local servers = {
-			"gleam",
-			"html",
+			"cmake",
 			"cssls",
-			"tailwindcss",
+			"emmet_ls",
+			"gleam",
+			"graphql",
+			"html",
 			"prismals",
 			"pyright",
-			"cmake",
+			"svelte",
+			"tailwindcss",
+			"templ",
 		}
 
 		for _, lsp in ipairs(servers) do
@@ -52,11 +56,7 @@ return {
 		end
 
 		vim.lsp.config("ts_ls", {
-			-- root_dir = util.root_pattern("package.json", "tsconfig.json", ".git"),
-			filetypes = { "typescript", "typescriptreact", "svelte" },
-			cmd = { "typescript-language-server", "--stdio" },
 			workspace_required = true,
-			root_markers = { "tsconfig.json", "package.json", "jsconfig.json", ".git" },
 			on_attach = function(client, bufnr)
 				on_attach()
 				vim.keymap.set("n", "<leader>oi", function()
@@ -72,56 +72,11 @@ return {
 		})
 		vim.lsp.enable("ts_ls")
 
-		-- configure svelte server
-		vim.lsp.config("svelte", {
-			-- root_dir = util.root_pattern("tsconfig.json", "package.json", ".git"),
-			on_attach = on_attach,
-			filetypes = { "svelte" },
-		})
-		vim.lsp.enable("svelte")
-
-		-- configure graphql language server
-		vim.lsp.config("graphql", {
-			on_attach = on_attach,
-			filetypes = {
-				"graphql",
-				"gql",
-				"svelte",
-				"typescriptreact",
-				"javascriptreact",
-			},
-		})
-		vim.lsp.enable("graphql")
-
-		-- configure emmet language server
-		vim.lsp.config("emmet_ls", {
-			on_attach = on_attach,
-			filetypes = {
-				"html",
-				"typescriptreact",
-				"javascriptreact",
-				"vue",
-				"solid",
-				"svelte",
-				"templ",
-			},
-		})
-		vim.lsp.enable("emmet_ls")
-
-		vim.lsp.config("templ", {
-			on_attach = on_attach,
-			filetypes = {
-				"templ",
-			},
-		})
-		vim.lsp.enable("templ")
-
 		-- configure gopls server
 		vim.lsp.config("gopls", {
 			cmd = { "gopls" },
 			on_attach = on_attach,
 			filetypes = { "go", "gomod", "gowork", "gotmpl", "templ" },
-			-- root_dir = util.root_pattern("go.work", "go.mod", ".git"),
 			settings = {
 				gopls = {
 					usePlaceholders = true,
@@ -138,20 +93,15 @@ return {
 				},
 			},
 		})
-		vim.lsp.enable("gopls")
+		vim.lsp.enable("go_pls")
 
 		-- configure lua server (with special settings)
 		vim.lsp.config("lua_ls", {
 			on_attach = on_attach,
 			settings = {
 				Lua = {
-					diagnostics = {
-						globals = { "vim" },
-					},
 					workspace = {
-						library = {
-							[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-						},
+						library = vim.api.nvim_get_runtime_file("", true),
 					},
 				},
 			},
