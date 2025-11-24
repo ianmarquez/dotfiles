@@ -58,3 +58,5 @@ create_symlink_if_not_exists "$HOME/Desktop/repos/dotfiles/config/btop" "$HOME/.
 create_symlink_if_not_exists "$HOME/Desktop/repos/dotfiles/config/ghostty" "$HOME/.config/ghostty"
 
 create_symlink_if_not_exists "$HOME/Desktop/repos/dotfiles/config/git" "$HOME/.config/git"
+
+create_symlink_if_not_exists "$HOME/Desktop/repos/dotfiles/config/yazi" "$HOME/.config/yazi"

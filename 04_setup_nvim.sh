@@ -8,3 +8,5 @@ brew install go
 brew install imagemagick
 brew install gs
 
+ya pkg add yazi-rs/flavors:catppuccin-mocha
+

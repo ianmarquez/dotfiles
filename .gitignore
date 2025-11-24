@@ -2,3 +2,4 @@ btop.log
 
 # Yazi specific ignores
 /config/yazi/flavors/*
+/config/yazi/package.toml

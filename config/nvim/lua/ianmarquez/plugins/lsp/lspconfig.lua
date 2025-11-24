@@ -50,27 +50,18 @@ return {
 			"templ",
 		}
 
+		local lsps = { "ts_ls", "lua_ls", "go_pls" }
+
 		for _, lsp in ipairs(servers) do
 			vim.lsp.config(lsp, { on_attach = on_attach })
-			vim.lsp.enable(lsp)
+			table.insert(lsps, lsp)
 		end
 
 		vim.lsp.config("ts_ls", {
 			workspace_required = true,
-			on_attach = function(client, bufnr)
-				on_attach()
-				vim.keymap.set("n", "<leader>oi", function()
-					if client ~= nil then
-						return client:exec_cmd({
-							title = "TS Organize Imports",
-							command = "_typescript.organizeImports",
-							arguments = { vim.api.nvim_buf_get_name(bufnr) },
-						})
-					end
-				end, { noremap = true, silent = true, desc = "Typescript [o]rganize [i]mports" }) -- mapping to organize imports for typescript
-			end,
+			on_attach = on_attach,
+			root_markers = { "tsconfig.json", "jsconfig.json", ".git", "package.json" },
 		})
-		vim.lsp.enable("ts_ls")
 
 		-- configure gopls server
 		vim.lsp.config("gopls", {
@@ -93,7 +84,6 @@ return {
 				},
 			},
 		})
-		vim.lsp.enable("go_pls")
 
 		-- configure lua server (with special settings)
 		vim.lsp.config("lua_ls", {
@@ -106,7 +96,8 @@ return {
 				},
 			},
 		})
-		vim.lsp.enable("lua_ls")
+
+		vim.lsp.enable(lsps)
 
 		vim.filetype.add({
 			extension = {

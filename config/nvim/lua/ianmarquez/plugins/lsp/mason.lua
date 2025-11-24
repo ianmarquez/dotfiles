@@ -9,16 +9,10 @@ return {
 	},
 	build = ":MasonUpdate",
 	config = function()
-		-- import mason
 		local mason = require("mason")
-
-		-- import mason-lspconfig
 		local mason_lspconfig = require("mason-lspconfig")
-
-		-- tool installer to ensure formatters and linters are installed
 		local mason_tool_installer = require("mason-tool-installer")
 
-		-- enable mason and configure icons
 		mason.setup({
 			ui = {
 				icons = {
@@ -47,12 +41,6 @@ return {
 				"prismals",
 				"templ",
 				"omnisharp",
-			},
-			-- auto-install configured servers (with lspconfig)
-			automatic_enable = {
-				exclude = {
-					"ts_ls",
-				},
 			},
 			automatic_installation = true, -- not the same as ensure_installed
 		})
