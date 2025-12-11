@@ -30,27 +30,52 @@ grid_configs:
     grid_defn:
       - border_width: 0.0
         callback: build_cell_strings
-        keys: QWERT ASDFG YUIOP HJKL;
-        num_cells_x: 5
-        num_cells_y: 4
+        keys: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+        num_cells_x: 26
+        num_cells_y: 1
       - border_width: 1.0
         callback: build_cell_strings
         keys: ""
-        num_cells_x: 5
-        num_cells_y: 4
+        num_cells_x: 1
+        num_cells_y: 26
       - border_width: 0.0
         callback: apply_strings_and_subgrid_to_cells
         keys: ""
         num_cells_x: 2
         num_cells_y: 1
     hold_subgrid_key_for_nudge: true
-    name: position_based_16_9
+    name: column_row
     nudges_per_cell: 4
     strategy: subgrid
     subgrid_dims:
-      - 4
-      - 4
-    subgrid_mouse_action_keys: QWER UIOP ASDF JKL;
+      - 3
+      - 3
+    subgrid_mouse_action_keys: WER SDF XCV
+  - always_show_subgrid: false
+    grid_defn:
+      - border_width: 0.0
+        callback: build_cell_strings
+        keys: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+        num_cells_x: 26
+        num_cells_y: 1
+      - border_width: 1.0
+        callback: build_cell_strings
+        keys: ""
+        num_cells_x: 1
+        num_cells_y: 26
+      - border_width: 0.0
+        callback: apply_strings_and_subgrid_to_cells
+        keys: ""
+        num_cells_x: 2
+        num_cells_y: 1
+    hold_subgrid_key_for_nudge: true
+    name: vertical_column_row
+    nudges_per_cell: 5
+    strategy: subgrid
+    subgrid_dims:
+      - 3
+      - 3
+    subgrid_mouse_action_keys: WER SDF XCV
 keyboard_layout:
   id: com.apple.keylayout.ABC
   name: ABC
@@ -273,33 +298,33 @@ keymaps:
       back mouse button (w/o overlay): null
       close UI element: Escape
       cycle click count: null
-      cycle font: "3"
-      cycle font reverse: shift+3
+      cycle font: null
+      cycle font reverse: null
       cycle grid action level: "2"
       cycle mouse action type: null
       cycle mouse button: null
-      decrease overlay opacity: ArrowDown
+      decrease overlay opacity: "-"
       edit config: Tab
       enter free mode: null
       execute mouse action: Space
-      execute mouse move: OptionLeft tap
+      execute mouse move: null
       exit free mode: Escape
       forward click: null
       forward mouse button: Q
       forward mouse button (w/o overlay): null
       hide overlay: Escape
       hold for back button: null
-      hold for drag: CommandLeft
+      hold for drag: null
       hold for forward button: null
       hold for middle button: null
-      hold for move: OptionLeft
-      hold for right button: CommandRight
+      hold for move: null
+      hold for right button: null
       hold for speed decrease: A
       hold for speed increase:
         - S
         - D
         - F
-      increase overlay opacity: ArrowUp
+      increase overlay opacity: +
       jump to bottom: null
       jump to left edge: null
       jump to right edge: null
@@ -318,26 +343,18 @@ keymaps:
       right click: null
       right mouse button: R
       right mouse button (w/o overlay): null
-      show overlay: ShiftRight tap
-      subgrid nudge down:
-        - K
-        - S
-      subgrid nudge left:
-        - J
-        - A
-      subgrid nudge right:
-        - L
-        - D
-      subgrid nudge up:
-        - I
-        - W
+      show overlay: null
+      subgrid nudge down: ArrowDown
+      subgrid nudge left: ArrowLeft
+      subgrid nudge right: ArrowRight
+      subgrid nudge up: ArrowUp
       switch monitor left: CommandLeft tap
       switch monitor right: CommandRight tap
       toggle app enabled: null
       toggle continuous mode: null
       toggle continuous mode until closed: "1"
-      toggle free mode: OptionLeft tap
-      toggle overlay: null
+      toggle free mode: null
+      toggle overlay: shift+tab
       toggle overlay lock: null
       undo last key: Backspace
       wheel down: ","
@@ -361,15 +378,15 @@ monitor_assignment_mode: auto
 name: ""
 style_configs:
   - always_on_subgrid_rgba:
-      - 1.0
-      - 1.0
-      - 1.0
+      - 1
+      - 1
+      - 1
       - 0.2
     background_rgba:
-      - 1.0
-      - 0.00392156862745098
-      - 0.8941176470588236
-      - 0.5
+      - 0.8862745098039215
+      - 0.16470588235294117
+      - 0.9490196078431372
+      - 0.35
     char_spacing_cell_width_ratio: 0.5
     char_spacing_font_size_ratio: 0.5
     char_spacing_strategy: cell_width_relative
@@ -402,36 +419,36 @@ style_configs:
     font_family: "[Apple System Font]"
     font_size_multiplier: 0.4
     font_weight: 500
-    grid_line_style: lines
+    grid_line_style: dots
     grid_rgba:
-      - 1.0
-      - 1.0
-      - 1.0
+      - 1
+      - 1
+      - 1
       - 0.5
     highlight_animation_ms: 0
     highlight_rgba:
-      - 0.23137254901960785
-      - 1.0
+      - 0.23529411764705882
+      - 1
       - 0.00392156862745098
-      - 0.4
+      - 0.5
     name: default
     show_initial_highlight: false
     subgrid_font_size_multiplier: 0.75
     subgrid_rgba:
-      - 1.0
-      - 1.0
-      - 1.0
+      - 1
+      - 1
+      - 1
       - 0.5
     subgrid_text_rgba:
-      - 1.0
-      - 1.0
-      - 1.0
+      - 1
+      - 1
+      - 1
       - 0.5
     text_rgba:
-      - 1.0
-      - 1.0
-      - 1.0
-      - 1.0
+      - 1
+      - 1
+      - 1
+      - 1
     text_shadow_blur_radius: 4.0
     text_shadow_offset:
       - 0.0
@@ -440,6 +457,6 @@ style_configs:
       - 0.02
       - 0.04
       - 0.06
-      - 1.0
+      - 1
     text_y_offset: 0.0
-    window_opacity: 1.0
+    window_opacity: 1
