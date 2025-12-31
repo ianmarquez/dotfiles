@@ -48,9 +48,9 @@ grid_configs:
     nudges_per_cell: 4
     strategy: subgrid
     subgrid_dims:
-      - 3
-      - 3
-    subgrid_mouse_action_keys: WER SDF XCV
+      - 5
+      - 2
+    subgrid_mouse_action_keys: QWERT ZXCVB
   - always_show_subgrid: false
     grid_defn:
       - border_width: 0.0
