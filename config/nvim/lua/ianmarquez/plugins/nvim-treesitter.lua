@@ -4,6 +4,7 @@ return {
 		"windwp/nvim-ts-autotag",
 		"nvim-treesitter/nvim-treesitter-context",
 	},
+	branch = "main",
 	event = { "BufReadPre", "BufNewFile" },
 	build = ":TSUpdate",
 	-- commit = "364b86e",
@@ -20,7 +21,7 @@ return {
 				enable_close_on_slash = false, -- Auto close on trailing </
 			},
 		})
-		local treesitter = require("nvim-treesitter.configs")
+		local treesitter = require("nvim-treesitter")
 
 		treesitter.setup({
 			-- enable syntax highlighting

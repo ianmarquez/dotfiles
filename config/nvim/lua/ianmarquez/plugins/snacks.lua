@@ -320,7 +320,7 @@ M.config = {
 	opts = {
 		dashboard = M.dashboard,
 		explorer = { replace_netrw = true },
-		image = {},
+		image = { enabled = false },
 		input = M.input,
 		notifier = { timeout = 1500 },
 		notify = {},
