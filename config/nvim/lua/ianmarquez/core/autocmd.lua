@@ -6,6 +6,21 @@ local group = vim.api.nvim_create_augroup("Custom Au Group", { clear = true })
 --   desc = "Save on InsertLeave"
 -- })
 
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function(args)
+		local bufnr = args.buf
+		-- Check if highlighter is already active for this buffer
+		if vim.treesitter.highlighter.active[bufnr] then
+			return
+		end
+
+		local lang = vim.treesitter.language.get_lang(vim.bo[bufnr].filetype)
+		if lang then
+			pcall(vim.treesitter.start, bufnr, lang)
+		end
+	end,
+})
+
 vim.api.nvim_create_autocmd("UIEnter", {
 	callback = function()
 		if vim.fn.argc(-1) > 0 then
